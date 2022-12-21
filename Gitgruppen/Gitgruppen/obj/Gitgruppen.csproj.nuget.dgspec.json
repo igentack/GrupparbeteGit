@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LexiconWindows\\Desktop\\WebbKurs\\Övning11\\Gitgruppen\\Gitgruppen\\Gitgruppen.csproj": {}
+    "C:\\Users\\johan\\Source\\Repos\\igentack\\GrupparbeteGit\\Gitgruppen\\Gitgruppen\\Gitgruppen.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LexiconWindows\\Desktop\\WebbKurs\\Övning11\\Gitgruppen\\Gitgruppen\\Gitgruppen.csproj": {
+    "C:\\Users\\johan\\Source\\Repos\\igentack\\GrupparbeteGit\\Gitgruppen\\Gitgruppen\\Gitgruppen.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LexiconWindows\\Desktop\\WebbKurs\\Övning11\\Gitgruppen\\Gitgruppen\\Gitgruppen.csproj",
+        "projectUniqueName": "C:\\Users\\johan\\Source\\Repos\\igentack\\GrupparbeteGit\\Gitgruppen\\Gitgruppen\\Gitgruppen.csproj",
         "projectName": "Gitgruppen",
-        "projectPath": "C:\\Users\\LexiconWindows\\Desktop\\WebbKurs\\Övning11\\Gitgruppen\\Gitgruppen\\Gitgruppen.csproj",
-        "packagesPath": "C:\\Users\\LexiconWindows\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LexiconWindows\\Desktop\\WebbKurs\\Övning11\\Gitgruppen\\Gitgruppen\\obj\\",
+        "projectPath": "C:\\Users\\johan\\Source\\Repos\\igentack\\GrupparbeteGit\\Gitgruppen\\Gitgruppen\\Gitgruppen.csproj",
+        "packagesPath": "C:\\Users\\johan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\johan\\Source\\Repos\\igentack\\GrupparbeteGit\\Gitgruppen\\Gitgruppen\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\LexiconWindows\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\johan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -58,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
