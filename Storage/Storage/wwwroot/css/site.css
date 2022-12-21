@@ -15,4 +15,19 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: antiquewhite;
 }
+
+body > header > nav {
+    background-color: #1F2C4D;
+}
+
+body > div > main > table > tbody > tr:nth-child(odd) {
+    background-color: white;
+ 
+}
+
+body > div > main > table > tbody > tr:nth-child(even) {
+    background-color: ghostwhite;
+}
+

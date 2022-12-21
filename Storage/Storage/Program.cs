@@ -2,10 +2,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using Storage.Data;
 var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
 builder.Services.AddDbContext<StorageContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("StorageContext") ?? throw new InvalidOperationException("Connection string 'StorageContext' not found.")));
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

@@ -8,7 +8,7 @@ namespace Storage.Models
 
         [StringLength(64, MinimumLength = 2)]
         public string Name { get; set; } = string.Empty;
-
+     
         public int Price { get; set; }
 
         [Display(Name = "Beställningsdatum"), DataType(DataType.Date)]
@@ -17,11 +17,12 @@ namespace Storage.Models
         [Required, StringLength(64, MinimumLength = 2)]
         public string Category { get; set; } = string.Empty;
 
+        [StringLength(64, MinimumLength = 3)]
         public string Shelf { get; set; } = string.Empty;
 
         public int Count { get; set; }
-
-        public string Description { get; set; }
+        [StringLength(256, MinimumLength = 3)]
+        public string? Description { get; set; }
 
     }
 
