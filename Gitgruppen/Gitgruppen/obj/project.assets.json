@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\johan\\.nuget\\packages\\": {}
+    "C:\\Users\\LexiconWindows\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\johan\\Source\\Repos\\igentack\\GrupparbeteGit\\Gitgruppen\\Gitgruppen\\Gitgruppen.csproj",
+      "projectUniqueName": "C:\\Users\\LexiconWindows\\Desktop\\LexiconMappen\\LexiconProjekten\\GrupparbeteGit\\Gitgruppen\\Gitgruppen\\Gitgruppen.csproj",
       "projectName": "Gitgruppen",
-      "projectPath": "C:\\Users\\johan\\Source\\Repos\\igentack\\GrupparbeteGit\\Gitgruppen\\Gitgruppen\\Gitgruppen.csproj",
-      "packagesPath": "C:\\Users\\johan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\johan\\Source\\Repos\\igentack\\GrupparbeteGit\\Gitgruppen\\Gitgruppen\\obj\\",
+      "projectPath": "C:\\Users\\LexiconWindows\\Desktop\\LexiconMappen\\LexiconProjekten\\GrupparbeteGit\\Gitgruppen\\Gitgruppen\\Gitgruppen.csproj",
+      "packagesPath": "C:\\Users\\LexiconWindows\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\LexiconWindows\\Desktop\\LexiconMappen\\LexiconProjekten\\GrupparbeteGit\\Gitgruppen\\Gitgruppen\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\johan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\LexiconWindows\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -64,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
