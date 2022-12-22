@@ -36,7 +36,7 @@ namespace Gitgruppen.Controllers
             }
 
             var boat = await _context.Boat
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (boat == null)
             {
                 return NotFound();
@@ -90,7 +90,7 @@ namespace Gitgruppen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,brand,color")] Boat boat)
         {
-            if (id != boat.id)
+            if (id != boat.Id)
             {
                 return NotFound();
             }
@@ -104,7 +104,7 @@ namespace Gitgruppen.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BoatExists(boat.id))
+                    if (!BoatExists(boat.Id))
                     {
                         return NotFound();
                     }
@@ -127,7 +127,7 @@ namespace Gitgruppen.Controllers
             }
 
             var boat = await _context.Boat
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (boat == null)
             {
                 return NotFound();
@@ -157,7 +157,7 @@ namespace Gitgruppen.Controllers
 
         private bool BoatExists(int id)
         {
-          return (_context.Boat?.Any(e => e.id == id)).GetValueOrDefault();
+          return (_context.Boat?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
