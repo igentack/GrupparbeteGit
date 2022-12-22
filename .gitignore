@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/Gitgruppen/.vs/Gitgruppen/DesignTimeBuild/.dtbcache.v2
+/Gitgruppen/.vs/Gitgruppen/v17/.suo
