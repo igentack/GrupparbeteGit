@@ -2,8 +2,8 @@
 {
     public class Boat
     {
-        public int Id { get; set; }
-        public string Brand { get; set; }
-        public string Color { get; set; }
+        public int id { get; set; }
+        public string brand { get; set; }
+        public string color { get; set; }
     }
 }
