@@ -10,7 +10,6 @@ namespace Gitgruppen.Models
         public string LicensePlate { get; set; }
         public Type Type { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime Arrived { get; set; } = DateTime.Now;
 
         public string Color { get; set; }
