@@ -90,11 +90,11 @@ body > header > nav {
 }
 
 body > div > main > table > tbody > tr:nth-child(odd) {
-    background-color: lightblue;
+    background-color: lightgrey;
     color: black;
     font-family: 'Malgun Gothic';
-
     text-align: center;
+   
 }
 
 
