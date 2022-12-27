@@ -11,7 +11,8 @@ namespace Gitgruppen.Models
         public Type Type { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime Arrived { get; set; }
+        public DateTime Arrived { get; set; } = DateTime.Now;
+        
 
         public string Color { get; set; }
         public string Brand { get; set; }
