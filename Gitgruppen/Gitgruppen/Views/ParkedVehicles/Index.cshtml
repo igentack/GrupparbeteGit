@@ -7,13 +7,13 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New Vehicle</a>
+    <a class="btn btn-outline-dark" asp-action="Create">Add Vehicle</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="bg-dark bg-opacity-75 text-light text-uppercase text-center">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Type)
+                @Html.DisplayNameFor(model => model.Type)s
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Arrived)
@@ -54,10 +54,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NumberOfWheels)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.LicensePlate">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.LicensePlate">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.LicensePlate">Delete</a>
+            <td class="float-end border-bottom-0">
+                <a class="btn btn-outline-dark text-decoration-none" asp-action="Edit" asp-route-id="@item.LicensePlate">Edit</a> &nbsp;
+                <a class="btn btn-outline-dark text-decoration-none" asp-action="Details" asp-route-id="@item.LicensePlate">Details</a> &nbsp;
+                <a class="btn btn-outline-danger text-decoration-none" asp-action="Delete" asp-route-id="@item.LicensePlate">Delete</a>
             </td>
         </tr>
 }
