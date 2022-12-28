@@ -14,6 +14,8 @@ namespace Gitgruppen.Data
         {
         }
 
-        public DbSet<Gitgruppen.Models.Boat> Boat { get; set; } = default!;
+        public DbSet<Gitgruppen.Models.ParkedVehicle> ParkedVehicle { get; set; } = default!;
+
+        public DbSet<Gitgruppen.Models.OverViewModel> OverViewModel { get; set; } = default!;
     }
 }

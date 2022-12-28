@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Gitgruppen.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,6 +10,7 @@ builder.Services.AddDbContext<GitgruppenContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("GitgruppenContext") ?? throw new InvalidOperationException("Connection string 'GitgruppenContext' not found.")));
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -26,6 +28,10 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=ParkedVehicles}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 

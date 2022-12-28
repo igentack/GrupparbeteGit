@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Gitgruppen.Models.ParkedVehicle>
+
+@{
+    ViewData["Title"] = "Garage 2.0";
+}
+
+<h1><i>Garage Manager</i></h1>
+
+<p>
+    <a class="btn btn-outline-dark" asp-action="Create">Check in Vehicle</a>
+</p>
+<table class="table">
+    <thead class="bg-dark bg-opacity-75 text-light text-uppercase text-center">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)s
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arrived)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfWheels)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Arrived)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfWheels)
+            </td>
+            <td class="float-end border-bottom-0">
+                <a class="btn btn-outline-dark text-decoration-none" asp-action="Edit" asp-route-id="@item.LicensePlate">Modify</a> &nbsp;
+                <a class="btn btn-outline-dark text-decoration-none" asp-action="Details" asp-route-id="@item.LicensePlate">Details</a> &nbsp;
+                <a class="btn btn-outline-danger text-decoration-none" asp-action="Delete" asp-route-id="@item.LicensePlate">Check out vehicle</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
