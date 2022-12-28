@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Gitgruppen.Models.OverViewModel>
+
+@{
+    ViewData["Title"] = "OverView";
+}
+
+<h1>OverView</h1>
+
+<p>
+    <a class="btn btn-outline-dark"" asp-action="Create">Check in vehicle</a>
+</p>
+<table class="table">
+    <thead class="bg-dark bg-opacity-75 text-light text-uppercase text-center">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arrived)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkedTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Arrived)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkedTime)
+            </td>
+        <td>
+                <a class="btn btn-outline-dark text-decoration-none" asp-action="Edit" asp-route-id="@item.LicensePlate">Modify</a> |
+                <a class="btn btn-outline-dark text-decoration-none" asp-action="Details" asp-route-id="@item.LicensePlate">Details</a> |
+                <a class="btn btn-outline-danger text-decoration-none" asp-action="Delete" asp-route-id="@item.LicensePlate">Check out vehicle</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
