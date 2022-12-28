@@ -7,13 +7,16 @@
 <h1>OverView</h1>
 
 <p>
-    <a class="btn btn-outline-dark"" asp-action="Create">Check in vehicle</a>
+    <a class="btn btn-outline-dark" asp-action="Index">Go Back</a>
 </p>
 <table class="table">
     <thead class="bg-dark bg-opacity-75 text-light text-uppercase text-center">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LicensePlate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Brand)
@@ -24,7 +27,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.ParkedTime)
             </th>
-           @* <th></th>*@
+         
         </tr>
     </thead>
     <tbody>
@@ -33,6 +36,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
+            <td>
+                   @Html.DisplayFor(modelItem => item.LicensePlate)
+            </td> 
             <td>
                 @Html.DisplayFor(modelItem => item.Brand)
             </td>
