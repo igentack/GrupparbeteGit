@@ -13,10 +13,10 @@
     <thead class="bg-dark bg-opacity-75 text-light text-uppercase text-center">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Type)s
+                <a class="sortbuttons" asp-action="Index" asp-route-sort="@ViewData["TypeSort"]">@Html.DisplayNameFor(model => model.Type)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Arrived)
+                <a class="sortbuttons" asp-action="Index" asp-route-sort="@ViewData["ArrSort"]">@Html.DisplayNameFor(model => model.Arrived)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Color)

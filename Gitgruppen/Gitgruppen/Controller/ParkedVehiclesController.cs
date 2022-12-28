@@ -41,14 +41,36 @@ namespace Gitgruppen.Models
             return View(overViewModel);
         }
 
-        // GET: ParkedVehicles
-        public async Task<IActionResult> Index()
+        // GET: ParkedVehicles and Sorting
+        public async Task<IActionResult> Index(string sort)
         {
-              return _context.ParkedVehicle != null ? 
-                          View(await _context.ParkedVehicle.ToListAsync()) :
-                          Problem("Entity set 'GitgruppenContext.ParkedVehicle'  is null.");
-        }
+            ViewData["TypeSort"] = String.IsNullOrEmpty(sort) ? "typeDesc" : "";
+            ViewData["ArrSort"] = sort == "arrived" ? "arrDesc" : "arrived";
 
+            var vehicles = from v in _context.ParkedVehicle select v;
+
+            switch (sort)
+            {
+                case "typeDesc":
+                  vehicles = vehicles.OrderByDescending(v => v.Type);
+                    break;
+
+                case "arrived":
+                    vehicles = vehicles.OrderBy(v => v.Arrived);
+                    break;
+
+                case "arrDesc":
+                    vehicles = vehicles.OrderByDescending(v => v.Arrived);
+                    break;
+
+                default:
+                    vehicles = vehicles.OrderBy(v => v.Type);
+                    break;
+            }
+
+            return View(await vehicles.AsNoTracking().ToListAsync()); 
+                       
+        }
         // GET: ParkedVehicles/Details/5
         public async Task<IActionResult> Details(string id)
         {
