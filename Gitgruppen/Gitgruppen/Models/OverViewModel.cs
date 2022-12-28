@@ -6,6 +6,7 @@ namespace Gitgruppen.Models
     {
         public Type Type { get; set; }
         
+        [Key]
         public string LicensePlate { get; set; }
         
         public string Brand { get; set; }
