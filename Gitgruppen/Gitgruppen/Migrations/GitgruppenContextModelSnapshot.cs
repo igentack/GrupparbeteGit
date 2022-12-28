@@ -28,7 +28,7 @@ namespace Gitgruppen.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Arrived")
-                        .ValueGeneratedOnAdd()
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Brand")
