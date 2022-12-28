@@ -10,8 +10,12 @@ namespace Gitgruppen.Models
         public string LicensePlate { get; set; }
         public Type Type { get; set; }
 
-        //[DatabaseGenerated(DatabaseGeneratedOption.Computed)] <= fick ej denna att fungera
-        public DateTime Arrived { get; private set; } = DateTime.Now;
+        // => [DatabaseGenerated(DatabaseGeneratedOption.Computed)] <= Seems like EF not likes it - needs triggers
+
+        // See here https://learn.microsoft.com/en-us/ef/core/modeling/generated-properties?tabs=data-annotations
+        
+        [Display(Name = "Arrived Date")]
+        public DateTime Arrived { get; protected set; } = DateTime.Now;
 
         // TODO Kanske implementera en [Not Mapped] prop som räknar ut parkeringstiden?
 
