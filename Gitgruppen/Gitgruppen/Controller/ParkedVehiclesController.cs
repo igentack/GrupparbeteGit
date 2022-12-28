@@ -41,13 +41,19 @@ namespace Gitgruppen.Models
             return View(overViewModel);
         }
 
-        // GET: ParkedVehicles and Sorting
-        public async Task<IActionResult> Index(string sort)
+        // GET: ParkedVehicles, Searching Licenseplate and Sorting Columns
+        public async Task<IActionResult> Index(string sort, string licensePlate)
         {
             ViewData["TypeSort"] = String.IsNullOrEmpty(sort) ? "typeDesc" : "";
             ViewData["ArrSort"] = sort == "arrived" ? "arrDesc" : "arrived";
-
+            ViewData["LicensePlate"] = licensePlate;
+           
             var vehicles = from v in _context.ParkedVehicle select v;
+
+            if (!String.IsNullOrEmpty(licensePlate))
+            {
+                vehicles = vehicles.Where(v => v.LicensePlate.Contains(licensePlate));
+            }
 
             switch (sort)
             {
