@@ -18,6 +18,28 @@ namespace Gitgruppen.Models
             _context = context;
         }
 
+        public async Task<IActionResult> OverView()
+        {
+
+            if (_context.ParkedVehicle == null)
+            {
+                return NotFound();
+            }
+
+            var overViewModel = await _context.ParkedVehicle.Select(e => new OverViewModel
+            {
+                Type = e.Type,
+                LicensePlate = e.LicensePlate,
+                Brand = e.Brand,
+                Arrived= e.Arrived,
+                ParkedTime = e.Arrived - DateTime.Now
+
+            }).ToListAsync();
+ 
+            return View(overViewModel);
+        }
+
+
         // GET: ParkedVehicles
         public async Task<IActionResult> Index()
         {
