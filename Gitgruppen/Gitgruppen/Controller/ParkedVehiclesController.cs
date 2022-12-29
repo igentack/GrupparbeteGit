@@ -89,6 +89,11 @@ namespace Gitgruppen.Models
             return View(parkedVehicle);
         }
 
+        private bool ParkedVehicleExists(string id)
+        {
+          return (_context.ParkedVehicle?.Any(e => e.LicensePlate == id)).GetValueOrDefault();
+        }
+
         // GET: ParkedVehicles/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
@@ -168,18 +173,28 @@ namespace Gitgruppen.Models
                 return Problem("Entity set 'GitgruppenContext.ParkedVehicle'  is null.");
             }
             var parkedVehicle = await _context.ParkedVehicle.FindAsync(id);
+
+            OverViewModel res = new OverViewModel();
             if (parkedVehicle != null)
             {
                 _context.ParkedVehicle.Remove(parkedVehicle);
-            }
+
+                res.Arrived = parkedVehicle.Arrived;
+                res.LicensePlate = parkedVehicle.LicensePlate;
+                res.Brand = parkedVehicle.Brand;
+
+            } else res = null;
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+
+            return View("ResultView", res);
         }
 
-        private bool ParkedVehicleExists(string id)
+        public IActionResult ResultView(OverViewModel model)
         {
-          return (_context.ParkedVehicle?.Any(e => e.LicensePlate == id)).GetValueOrDefault();
+            return View(nameof(ResultView), model);
         }
+
     }
 }

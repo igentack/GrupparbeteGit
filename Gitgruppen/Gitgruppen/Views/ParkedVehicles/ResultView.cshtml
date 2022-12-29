@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Gitgruppen.Models.OverViewModel>
+
+
+@{
+    ViewData["Title"] = "Result";
+}
+
+<h1>Result</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arrived)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkedTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
