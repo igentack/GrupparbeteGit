@@ -127,7 +127,21 @@ namespace Gitgruppen.Models
             {
                 _context.Add(parkedVehicle);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(ResultView), parkedVehicle);
+
+                var overViewModel = new OverViewModel()
+                {
+                    Type = parkedVehicle.Type,
+                    LicensePlate = parkedVehicle.LicensePlate,
+                    Brand = parkedVehicle.Brand,
+                    Arrived = parkedVehicle.Arrived,
+                    Model = parkedVehicle.Model,
+                    Color = parkedVehicle.Color,
+                    NumberOfWheels = parkedVehicle.NumberOfWheels,
+                    ParkedTime = parkedVehicle.Arrived - DateTime.Now
+
+                };
+
+                return View(nameof(ResultView), overViewModel);
             }
             return View(parkedVehicle);
         }
@@ -237,7 +251,7 @@ namespace Gitgruppen.Models
             await _context.SaveChangesAsync();
 
 
-            return View(RedirectToAction(nameof(Index)));
+            return RedirectToAction(nameof(Index));
         }
 
 
