@@ -39,6 +39,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.NumberOfWheels)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LicensePlate)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -63,6 +66,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NumberOfWheels)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicensePlate)
+                </td>
             <td class="float-end border-bottom-0">
                 <a class="btn btn-outline-dark text-decoration-none" asp-action="Edit" asp-route-id="@item.LicensePlate">Modify</a> &nbsp;
                 <a class="btn btn-outline-dark text-decoration-none" asp-action="Details" asp-route-id="@item.LicensePlate">Details</a> &nbsp;
