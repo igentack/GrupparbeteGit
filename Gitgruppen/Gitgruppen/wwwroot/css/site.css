@@ -21,6 +21,16 @@ a {
     color: #0077cc;
 }
 
+.sortbuttons {
+    color: #b6c6dd;
+    text-decoration: none;
+}
+
+.sortbuttons:hover {
+    color: white;
+    text-decoration: underline;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;

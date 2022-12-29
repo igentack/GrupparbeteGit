@@ -12,7 +12,8 @@ namespace Gitgruppen.Models
         public string Brand { get; set; }
         
         public DateTime Arrived { get; set; }
-
+        
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm\\:ss}")]
         public TimeSpan ParkedTime { get; set; }    
 
     }
