@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Gitgruppen.Models.OverViewModel>
+﻿@model Gitgruppen.Models.OverViewModel
 
 
 @{
@@ -16,17 +16,22 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Brand)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Arrived)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ParkedTime)
-            </th>
-            <th></th>
+            </th>            
         </tr>
     </thead>
     <tbody>
     </tbody>
+
+   <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Brand)
+                </td>
+            </tr>
+    </tbody>
+
 </table>
 

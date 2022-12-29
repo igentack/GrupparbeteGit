@@ -74,7 +74,22 @@ namespace Gitgruppen.Models
                     break;
             }
 
-            return View(await vehicles.AsNoTracking().ToListAsync()); 
+
+            var overViewModel = await vehicles.AsNoTracking().Select(e => new OverViewModel
+            {
+
+                Type = e.Type,
+                LicensePlate = e.LicensePlate,
+                Brand = e.Brand,
+                Arrived = e.Arrived,
+                Model= e.Model,
+                Color= e.Color,
+                NumberOfWheels= e.NumberOfWheels,
+                ParkedTime = e.Arrived - DateTime.Now
+
+            }).ToListAsync();
+
+            return View(overViewModel); 
                        
         }
         // GET: ParkedVehicles/Details/5
@@ -112,9 +127,15 @@ namespace Gitgruppen.Models
             {
                 _context.Add(parkedVehicle);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ResultView), parkedVehicle);
             }
             return View(parkedVehicle);
+        }
+
+
+        public IActionResult ResultView(OverViewModel model)
+        {
+            return View(nameof(ResultView), model);
         }
 
         private bool ParkedVehicleExists(string id)
@@ -216,13 +237,9 @@ namespace Gitgruppen.Models
             await _context.SaveChangesAsync();
 
 
-            return View("ResultView", res);
+            return View(RedirectToAction(nameof(Index)));
         }
 
-        public IActionResult ResultView(OverViewModel model)
-        {
-            return View(nameof(ResultView), model);
-        }
 
     }
 }
