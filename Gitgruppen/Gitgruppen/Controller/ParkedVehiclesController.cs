@@ -254,6 +254,38 @@ namespace Gitgruppen.Models
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Receipt(string id)
+        {
+            if (id == null || _context.ParkedVehicle == null)
+            {
+                return NotFound();
+            }
 
+            double PricePerHour = 3;
+            var parkedVehicle = await _context.ParkedVehicle.Select(e => new ReceiptModel
+            {
+                Type = e.Type,
+                LicensePlate = e.LicensePlate,
+                Arrived = e.Arrived,
+                Departured = DateTime.Now,
+                HoursParked = Math.Round((DateTime.Now - e.Arrived).TotalHours, 2),
+                ParkedTime = DateTime.Now - e.Arrived,
+            })
+                .FirstOrDefaultAsync(m => m.LicensePlate == id);
+
+            parkedVehicle.ParkingCost = Math.Round(3 + (parkedVehicle.HoursParked * PricePerHour), 2);
+
+            double days = Math.Round(parkedVehicle.ParkedTime.TotalDays);
+            double hours = Math.Round(parkedVehicle.ParkedTime.TotalHours) - (days * 24);
+            double minutes = Math.Round(parkedVehicle.ParkedTime.TotalMinutes) - ((hours + (days * 24)) * 60);
+
+            parkedVehicle.StrParkedTime = days.ToString() + " Days " + hours.ToString() + " Hours " + minutes.ToString() + " Minutes ";
+            if (parkedVehicle == null)
+            {
+                return NotFound();
+            }
+
+            return View(parkedVehicle);
+        }
     }
 }
