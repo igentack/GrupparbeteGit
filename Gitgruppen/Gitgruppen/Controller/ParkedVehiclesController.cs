@@ -49,7 +49,7 @@ namespace Gitgruppen.Models
         }
 
         // GET: ParkedVehicles/Details/5
-        public async Task<IActionResult> Details(string id)
+      /*  public async Task<IActionResult> Details(string id)
         {
             if (id == null || _context.ParkedVehicle == null)
             {
@@ -64,9 +64,26 @@ namespace Gitgruppen.Models
             }
 
             return View(parkedVehicle);
-        }
+        }*/
+        
+        // GET: ParkedVehicles/DetailsModal
+        public async Task<IActionResult> DetailsModal()
+        {
+            var id = "ABC222";
+            if (id == null || _context.ParkedVehicle == null)
+            {
+                return NotFound();
+            }
 
-        // GET: ParkedVehicles/Create
+            var parkedVehicle = await _context.ParkedVehicle
+                .FirstOrDefaultAsync(m => m.LicensePlate == id);
+            if (parkedVehicle == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("DetailsModal", parkedVehicle);
+        }
         public IActionResult Create()
         {
             return View();
