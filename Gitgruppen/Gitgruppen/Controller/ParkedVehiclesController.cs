@@ -129,6 +129,7 @@ namespace Gitgruppen.Models
 
             if (ModelState.IsValid)
             {
+                    parkedVehicle.Arrived = DateTime.Now;
                 _context.Add(parkedVehicle);
                 await _context.SaveChangesAsync();
 
