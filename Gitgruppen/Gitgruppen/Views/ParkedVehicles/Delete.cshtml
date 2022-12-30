@@ -48,9 +48,17 @@
         </dd>
     </dl>
     
+    <h4>Checkout without receipt </h4>
     <form asp-action="Delete">
         <input type="hidden" asp-for="LicensePlate" />
         <input type="submit" value="Check out" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+    <br />
+    <h4>Receipt at checkout </h4>
+    <form asp-action="Receipt" asp-route-id="@Model?.LicensePlate">
+        <input type="hidden" asp-for="LicensePlate" />
+        <input type="submit" value="Receipt" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
