@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Gitgruppen.Models;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Gitgruppen.Data
 {
     public class GitgruppenContext : DbContext
     {
-        public GitgruppenContext (DbContextOptions<GitgruppenContext> options)
+        public GitgruppenContext(DbContextOptions<GitgruppenContext> options)
             : base(options)
         {
         }

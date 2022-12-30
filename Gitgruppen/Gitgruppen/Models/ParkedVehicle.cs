@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Gitgruppen.Models
 {
@@ -13,7 +11,7 @@ namespace Gitgruppen.Models
         // => [DatabaseGenerated(DatabaseGeneratedOption.Computed)] <= Seems like EF not likes it - needs triggers
 
         // See here https://learn.microsoft.com/en-us/ef/core/modeling/generated-properties?tabs=data-annotations
-        
+
         [Display(Name = "Arrived Date")]
         public DateTime Arrived { get; protected set; } = DateTime.Now;
 
