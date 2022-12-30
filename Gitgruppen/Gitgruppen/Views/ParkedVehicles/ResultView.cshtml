@@ -2,12 +2,12 @@
 
 
 
-@{ViewData["Title"] = "Car checked in";}
+@{ViewData["Title"] = "Vehicle checked in";}
 
 <h1>Result</h1>
 @if (ViewData["opResult"].Equals("exists"))
 {
-    ViewData["Title"] = "Car already parked";
+    ViewData["Title"] = "Vehicle already parked";
     <h3><i>Car already checked in</i></h3>
 }
 @if (ViewData["opResult"].Equals("error"))
