@@ -92,14 +92,31 @@ namespace Gitgruppen.Models
                 return NotFound();
             }
 
+          
             return View(parkedVehicle);
         }
-
+        
         // GET: ParkedVehicles/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
+        {
+            var id = "ABC222";
+            if (id == null || _context.ParkedVehicle == null)
+            {
+                return NotFound();
+            }
+
+            var parkedVehicle = await _context.ParkedVehicle
+                .FirstOrDefaultAsync(m => m.LicensePlate == id);
+            if (parkedVehicle == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("krux", parkedVehicle);
+        }/*    public IActionResult Create()
         {
             return View();
-        }
+        }*/
 
         // POST: ParkedVehicles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.

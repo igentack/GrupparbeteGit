@@ -9,16 +9,19 @@
 <p>
     <a class="btn btn-outline-dark" asp-action="Create">Check in Vehicle</a>
 </p>
-<form asp-action="Index" method="get">
-    <div class="form-actions no-color">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder=" Search Licenseplate" name="licensePlate" value="@ViewData["LicensePlate"]" />
-            <input type="submit" value="Search" class="btn btn-success" /> &nbsp;
-            <a class="btn btn-outline-dark text-decoration-none" asp-action="Index">Whole Garage</a>
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder=" Search Licenseplate" name="licensePlate" value="@ViewData["LicensePlate"]" />
+                <input type="submit" value="Search" class="btn btn-success" /> &nbsp;
+                <a class="btn btn-outline-dark text-decoration-none" asp-action="Index">Whole Garage</a>
+            </div>
         </div>
-    </div>
-</form>
-<table class="table">
+    </form>
+<button type="button" id="prevent" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#addkrux" onclick="showDetatails()">
+        TestKrux
+    </button>
+<table class="table" id="kruxTable">
     <thead class="bg-dark bg-opacity-75 text-light text-uppercase text-center">
         <tr>
             <th>
