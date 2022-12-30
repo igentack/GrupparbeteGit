@@ -34,12 +34,21 @@
             <th>
                 @Html.DisplayNameFor(model => model.Brand)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Arrived)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ParkedTime)
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Arrived)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Color)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumberOfWheels)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParkedTime)
+                </th>
         </tr>
     </thead>
     <tbody>
@@ -51,19 +60,23 @@
                 @Html.DisplayFor(model => model.LicensePlate)
                 </td>
                 <td>
-                @Html.DisplayFor(model => model.Brand)
+                    @Html.DisplayFor(model => model.Brand)
+                </td>
+                    <td>
+                @Html.DisplayFor(model => model.Arrived)
                 </td>
                 <td>
-                @Html.DisplayFor(model => model.Arrived)
+                    @Html.DisplayFor(model => model.Model)
+                </td>
+                <td>
+        @Html.DisplayFor(model => model.Color)
+                </td>
+                <td>
+        @Html.DisplayFor(model => model.NumberOfWheels)
                 </td>
                 <td>
                 @Html.DisplayFor(model => model.ParkedTime)
                 </td>
-                @*    <td>
-            <a class="btn btn-outline-dark text-decoration-none" asp-action="Edit" asp-route-id="@item.LicensePlate">Modify</a> |
-            <a class="btn btn-outline-dark text-decoration-none" asp-action="Details" asp-route-id="@item.LicensePlate">Details</a> |
-            <a class="btn btn-outline-danger text-decoration-none" asp-action="Delete" asp-route-id="@item.LicensePlate">Check out vehicle</a>
-            </td>*@
             </tr>
     </tbody>
 </table>
