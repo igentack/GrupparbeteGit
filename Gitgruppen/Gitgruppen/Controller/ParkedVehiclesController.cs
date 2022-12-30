@@ -74,7 +74,22 @@ namespace Gitgruppen.Models
                     break;
             }
 
-            return View(await vehicles.AsNoTracking().ToListAsync()); 
+
+            var overViewModel = await vehicles.AsNoTracking().Select(e => new OverViewModel
+            {
+
+                Type = e.Type,
+                LicensePlate = e.LicensePlate,
+                Brand = e.Brand,
+                Arrived = e.Arrived,
+                Model= e.Model,
+                Color= e.Color,
+                NumberOfWheels= e.NumberOfWheels,
+                ParkedTime = e.Arrived - DateTime.Now
+
+            }).ToListAsync();
+
+            return View(overViewModel); 
                        
         }
         // GET: ParkedVehicles/Details/5
@@ -129,9 +144,34 @@ namespace Gitgruppen.Models
             {
                 _context.Add(parkedVehicle);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                var overViewModel = new OverViewModel()
+                {
+                    Type = parkedVehicle.Type,
+                    LicensePlate = parkedVehicle.LicensePlate,
+                    Brand = parkedVehicle.Brand,
+                    Arrived = parkedVehicle.Arrived,
+                    Model = parkedVehicle.Model,
+                    Color = parkedVehicle.Color,
+                    NumberOfWheels = parkedVehicle.NumberOfWheels,
+                    ParkedTime = parkedVehicle.Arrived - DateTime.Now
+
+                };
+
+                return View(nameof(ResultView), overViewModel);
             }
             return View(parkedVehicle);
+        }
+
+
+        public IActionResult ResultView(OverViewModel model)
+        {
+            return View(nameof(ResultView), model);
+        }
+
+        private bool ParkedVehicleExists(string id)
+        {
+          return (_context.ParkedVehicle?.Any(e => e.LicensePlate == id)).GetValueOrDefault();
         }
 
         // GET: ParkedVehicles/Edit/5
@@ -213,18 +253,24 @@ namespace Gitgruppen.Models
                 return Problem("Entity set 'GitgruppenContext.ParkedVehicle'  is null.");
             }
             var parkedVehicle = await _context.ParkedVehicle.FindAsync(id);
+
+            OverViewModel res = new OverViewModel();
             if (parkedVehicle != null)
             {
                 _context.ParkedVehicle.Remove(parkedVehicle);
-            }
+
+                res.Arrived = parkedVehicle.Arrived;
+                res.LicensePlate = parkedVehicle.LicensePlate;
+                res.Brand = parkedVehicle.Brand;
+
+            } else res = null;
             
             await _context.SaveChangesAsync();
+
+
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ParkedVehicleExists(string id)
-        {
-          return (_context.ParkedVehicle?.Any(e => e.LicensePlate == id)).GetValueOrDefault();
-        }
+
     }
 }
