@@ -41,14 +41,57 @@ namespace Gitgruppen.Models
             return View(overViewModel);
         }
 
-        // GET: ParkedVehicles
-        public async Task<IActionResult> Index()
+        // GET: ParkedVehicles, Searching Licenseplate and Sorting Columns
+        public async Task<IActionResult> Index(string sort, string licensePlate)
         {
-              return _context.ParkedVehicle != null ? 
-                          View(await _context.ParkedVehicle.ToListAsync()) :
-                          Problem("Entity set 'GitgruppenContext.ParkedVehicle'  is null.");
-        }
+            ViewData["TypeSort"] = String.IsNullOrEmpty(sort) ? "typeDesc" : "";
+            ViewData["ArrSort"] = sort == "arrived" ? "arrDesc" : "arrived";
+            ViewData["LicensePlate"] = licensePlate;
+           
+            var vehicles = from v in _context.ParkedVehicle select v;
 
+            if (!String.IsNullOrEmpty(licensePlate))
+            {
+                vehicles = vehicles.Where(v => v.LicensePlate.Contains(licensePlate));
+            }
+
+            switch (sort)
+            {
+                case "typeDesc":
+                  vehicles = vehicles.OrderByDescending(v => v.Type);
+                    break;
+
+                case "arrived":
+                    vehicles = vehicles.OrderBy(v => v.Arrived);
+                    break;
+
+                case "arrDesc":
+                    vehicles = vehicles.OrderByDescending(v => v.Arrived);
+                    break;
+
+                default:
+                    vehicles = vehicles.OrderBy(v => v.Type);
+                    break;
+            }
+
+
+            var overViewModel = await vehicles.AsNoTracking().Select(e => new OverViewModel
+            {
+
+                Type = e.Type,
+                LicensePlate = e.LicensePlate,
+                Brand = e.Brand,
+                Arrived = e.Arrived,
+                Model= e.Model,
+                Color= e.Color,
+                NumberOfWheels= e.NumberOfWheels,
+                ParkedTime = e.Arrived - DateTime.Now
+
+            }).ToListAsync();
+
+            return View(overViewModel); 
+                       
+        }
         // GET: ParkedVehicles/Details/5
         public async Task<IActionResult> Details(string id)
         {
@@ -84,9 +127,34 @@ namespace Gitgruppen.Models
             {
                 _context.Add(parkedVehicle);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                var overViewModel = new OverViewModel()
+                {
+                    Type = parkedVehicle.Type,
+                    LicensePlate = parkedVehicle.LicensePlate,
+                    Brand = parkedVehicle.Brand,
+                    Arrived = parkedVehicle.Arrived,
+                    Model = parkedVehicle.Model,
+                    Color = parkedVehicle.Color,
+                    NumberOfWheels = parkedVehicle.NumberOfWheels,
+                    ParkedTime = parkedVehicle.Arrived - DateTime.Now
+
+                };
+
+                return View(nameof(ResultView), overViewModel);
             }
             return View(parkedVehicle);
+        }
+
+
+        public IActionResult ResultView(OverViewModel model)
+        {
+            return View(nameof(ResultView), model);
+        }
+
+        private bool ParkedVehicleExists(string id)
+        {
+          return (_context.ParkedVehicle?.Any(e => e.LicensePlate == id)).GetValueOrDefault();
         }
 
         // GET: ParkedVehicles/Edit/5
@@ -168,18 +236,24 @@ namespace Gitgruppen.Models
                 return Problem("Entity set 'GitgruppenContext.ParkedVehicle'  is null.");
             }
             var parkedVehicle = await _context.ParkedVehicle.FindAsync(id);
+
+            OverViewModel res = new OverViewModel();
             if (parkedVehicle != null)
             {
                 _context.ParkedVehicle.Remove(parkedVehicle);
-            }
+
+                res.Arrived = parkedVehicle.Arrived;
+                res.LicensePlate = parkedVehicle.LicensePlate;
+                res.Brand = parkedVehicle.Brand;
+
+            } else res = null;
             
             await _context.SaveChangesAsync();
+
+
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ParkedVehicleExists(string id)
-        {
-          return (_context.ParkedVehicle?.Any(e => e.LicensePlate == id)).GetValueOrDefault();
-        }
+
     }
 }
