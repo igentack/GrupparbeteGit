@@ -1,6 +1,12 @@
-﻿using Gitgruppen.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Gitgruppen.Data;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Gitgruppen.Models
 {
@@ -27,11 +33,11 @@ namespace Gitgruppen.Models
                 Type = e.Type,
                 LicensePlate = e.LicensePlate,
                 Brand = e.Brand,
-                Arrived = e.Arrived,
+                Arrived= e.Arrived,
                 ParkedTime = e.Arrived - DateTime.Now
 
             }).ToListAsync();
-
+ 
             return View(overViewModel);
         }
 
@@ -41,7 +47,7 @@ namespace Gitgruppen.Models
             ViewData["TypeSort"] = String.IsNullOrEmpty(sort) ? "typeDesc" : "";
             ViewData["ArrSort"] = sort == "arrived" ? "arrDesc" : "arrived";
             ViewData["LicensePlate"] = licensePlate;
-
+           
             var vehicles = from v in _context.ParkedVehicle select v;
 
             if (!String.IsNullOrEmpty(licensePlate))
@@ -52,7 +58,7 @@ namespace Gitgruppen.Models
             switch (sort)
             {
                 case "typeDesc":
-                    vehicles = vehicles.OrderByDescending(v => v.Type);
+                  vehicles = vehicles.OrderByDescending(v => v.Type);
                     break;
 
                 case "arrived":
@@ -76,15 +82,15 @@ namespace Gitgruppen.Models
                 LicensePlate = e.LicensePlate,
                 Brand = e.Brand,
                 Arrived = e.Arrived,
-                Model = e.Model,
-                Color = e.Color,
-                NumberOfWheels = e.NumberOfWheels,
+                Model= e.Model,
+                Color= e.Color,
+                NumberOfWheels= e.NumberOfWheels,
                 ParkedTime = e.Arrived - DateTime.Now
 
             }).ToListAsync();
 
-            return View(overViewModel);
-
+            return View(overViewModel); 
+                       
         }
         // GET: ParkedVehicles/Details/5
         public async Task<IActionResult> Details(string id)
@@ -121,31 +127,30 @@ namespace Gitgruppen.Models
             if (ParkedVehicleExists(parkedVehicle.LicensePlate) != true)
             {
 
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                _context.Add(parkedVehicle);
+                await _context.SaveChangesAsync();
+
+                var overViewModel = new OverViewModel()
                 {
-                    _context.Add(parkedVehicle);
-                    await _context.SaveChangesAsync();
+                    Type = parkedVehicle.Type,
+                    LicensePlate = parkedVehicle.LicensePlate,
+                    Brand = parkedVehicle.Brand,
+                    Arrived = parkedVehicle.Arrived,
+                    Model = parkedVehicle.Model,
+                    Color = parkedVehicle.Color,
+                    NumberOfWheels = parkedVehicle.NumberOfWheels,
+                    ParkedTime = parkedVehicle.Arrived - DateTime.Now
 
-                    var overViewModel = new OverViewModel()
-                    {
-                        Type = parkedVehicle.Type,
-                        LicensePlate = parkedVehicle.LicensePlate,
-                        Brand = parkedVehicle.Brand,
-                        Arrived = parkedVehicle.Arrived,
-                        Model = parkedVehicle.Model,
-                        Color = parkedVehicle.Color,
-                        NumberOfWheels = parkedVehicle.NumberOfWheels,
-                        ParkedTime = parkedVehicle.Arrived - DateTime.Now
-
-                    };
-                    ViewData["opResult"] = "success";
-                    return View(nameof(ResultView), overViewModel);
-                }
-                ViewData["opResult"] = "error";
-                return View(nameof(ResultView), null);
-
+                };
+                ViewData["opResult"] = "success";
+                return View(nameof(ResultView), overViewModel);
             }
-            else
+            ViewData["opResult"] = "error";
+            return View(nameof(ResultView), null);
+
+            }else
             {
                 ViewData["opResult"] = "exists";
                 return View(nameof(ResultView), null);
@@ -160,7 +165,7 @@ namespace Gitgruppen.Models
 
         private bool ParkedVehicleExists(string id)
         {
-            return (_context.ParkedVehicle?.Any(e => e.LicensePlate == id)).GetValueOrDefault();
+          return (_context.ParkedVehicle?.Any(e => e.LicensePlate == id)).GetValueOrDefault();
         }
 
         // GET: ParkedVehicles/Edit/5
@@ -209,7 +214,23 @@ namespace Gitgruppen.Models
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                var overViewModel = new OverViewModel()
+                {
+                    Type = parkedVehicle.Type,
+                    LicensePlate = parkedVehicle.LicensePlate,
+                    Brand = parkedVehicle.Brand,
+                    Arrived = parkedVehicle.Arrived,
+                    Model = parkedVehicle.Model,
+                    Color = parkedVehicle.Color,
+                    NumberOfWheels = parkedVehicle.NumberOfWheels,
+                    ParkedTime = parkedVehicle.Arrived - DateTime.Now
+
+                };
+
+
+                ViewData["opResult"] = "success";
+                return View(nameof(ResultView), overViewModel);
             }
             return View(parkedVehicle);
         }
@@ -252,9 +273,8 @@ namespace Gitgruppen.Models
                 res.LicensePlate = parkedVehicle.LicensePlate;
                 res.Brand = parkedVehicle.Brand;
 
-            }
-            else res = null;
-
+            } else res = null;
+            
             await _context.SaveChangesAsync();
 
 

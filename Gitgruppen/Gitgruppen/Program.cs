@@ -1,5 +1,6 @@
-﻿using Gitgruppen.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Gitgruppen.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
