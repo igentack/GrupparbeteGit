@@ -123,6 +123,10 @@ namespace Gitgruppen.Models
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("LicensePlate,Type,Arrived,Color,Brand,Model,NumberOfWheels")] ParkedVehicle parkedVehicle)
         {
+            string opResult;
+            if (ParkedVehicleExists(parkedVehicle.LicensePlate) != true)
+            {
+
             if (ModelState.IsValid)
             {
                 _context.Add(parkedVehicle);
@@ -140,10 +144,17 @@ namespace Gitgruppen.Models
                     ParkedTime = parkedVehicle.Arrived - DateTime.Now
 
                 };
-
+                ViewData["opResult"] = "success";
                 return View(nameof(ResultView), overViewModel);
             }
-            return View(parkedVehicle);
+            ViewData["opResult"] = "error";
+            return View(nameof(ResultView), null);
+
+            }else
+            {
+                ViewData["opResult"] = "exists";
+                return View(nameof(ResultView), null);
+            }
         }
 
 
