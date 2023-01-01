@@ -47,6 +47,7 @@ namespace Gitgruppen.Models
             ViewData["TypeSort"] = String.IsNullOrEmpty(sort) ? "typeDesc" : "";
             ViewData["ArrSort"] = sort == "arrived" ? "arrDesc" : "arrived";
             ViewData["LicensePlate"] = licensePlate;
+
            
             var vehicles = from v in _context.ParkedVehicle select v;
 
@@ -67,6 +68,26 @@ namespace Gitgruppen.Models
 
                 case "arrDesc":
                     vehicles = vehicles.OrderByDescending(v => v.Arrived);
+                    break;
+
+                case "color":
+                    vehicles = vehicles.OrderBy(v => v.Color);
+                    break;
+
+                case "brand":
+                    vehicles = vehicles.OrderBy(v => v.Brand);
+                    break;
+
+                case "model":
+                    vehicles = vehicles.OrderBy(v => v.Model);
+                    break;
+
+                case "numberofwheels":
+                    vehicles = vehicles.OrderBy(v => v.NumberOfWheels);
+                    break;
+
+                case "licenseplate":
+                    vehicles = vehicles.OrderBy(v => v.LicensePlate);
                     break;
 
                 default:
