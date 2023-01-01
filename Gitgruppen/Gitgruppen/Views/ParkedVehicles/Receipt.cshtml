@@ -56,12 +56,7 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="LicensePlate" />
         <input type="submit" value="Check out" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index"class="btn btn-outline-dark">Back to List</a>
     </form>
 
-</div>
-<div>
-    <br />
-    <a asp-action="Edit" asp-route-id="@Model?.LicensePlate">Modify</a> |
-    <a asp-action="Index">Back to List</a>
 </div>
