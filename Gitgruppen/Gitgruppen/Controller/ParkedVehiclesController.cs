@@ -46,6 +46,12 @@ namespace Gitgruppen.Models
         {
             ViewData["TypeSort"] = String.IsNullOrEmpty(sort) ? "typeDesc" : "";
             ViewData["ArrSort"] = sort == "arrived" ? "arrDesc" : "arrived";
+            ViewData["ColSort"] = sort == "color" ? "colDesc" : "color";
+            ViewData["BrandSort"] = sort == "brand" ? "brandDesc" : "brand";
+            ViewData["ModelSort"] = sort == "model" ? "modelDesc" : "model";
+            ViewData["WhSort"] = sort == "wheels" ? "wheelsDesc" : "wheels";
+            ViewData["LicenseSort"] = sort == "licenseplate" ? "licenseDesc" : "licenseplate";
+
             ViewData["LicensePlate"] = licensePlate;
 
            
@@ -73,21 +79,36 @@ namespace Gitgruppen.Models
                 case "color":
                     vehicles = vehicles.OrderBy(v => v.Color);
                     break;
+                case "colorDesc":
+                    vehicles = vehicles.OrderByDescending(v => v.Color);
+                    break;
 
                 case "brand":
                     vehicles = vehicles.OrderBy(v => v.Brand);
+                    break;
+                case "brandDesc":
+                    vehicles = vehicles.OrderByDescending(v => v.Brand);
                     break;
 
                 case "model":
                     vehicles = vehicles.OrderBy(v => v.Model);
                     break;
+                case "modelDesc":
+                    vehicles = vehicles.OrderByDescending(v => v.Model);
+                    break;
 
-                case "numberofwheels":
+                case "wheels":
                     vehicles = vehicles.OrderBy(v => v.NumberOfWheels);
+                    break;
+                case "wheelsDesc":
+                    vehicles = vehicles.OrderByDescending(v => v.NumberOfWheels);
                     break;
 
                 case "licenseplate":
                     vehicles = vehicles.OrderBy(v => v.LicensePlate);
+                    break;
+                case "licenseDesc":
+                    vehicles = vehicles.OrderByDescending(v => v.LicensePlate);
                     break;
 
                 default:
@@ -345,15 +366,15 @@ namespace Gitgruppen.Models
             double days = Math.Round(parkedVehicle.ParkedTime.TotalDays);
             double hours = Math.Round(parkedVehicle.ParkedTime.TotalHours) - (days * 24);
             double minutes = Math.Round(parkedVehicle.ParkedTime.TotalMinutes) - ((hours + (days * 24)) * 60);
-            if (hours<0)
+            if (minutes<0)
             {
-                days = days - 1;
-                hours = hours + 60;
-            }
-            if(minutes<0)
-            {
-                hours= hours - 1;
+                hours = hours - 1;
                 minutes = minutes + 60;
+            }
+            if(hours<0)
+            {
+                days= days - 1;
+                hours = hours + 24;
             }
             parkedVehicle.StrParkedTime = days.ToString() + " Days " + hours.ToString() + " Hours " + minutes.ToString() + " Minutes ";
             if (parkedVehicle == null)
