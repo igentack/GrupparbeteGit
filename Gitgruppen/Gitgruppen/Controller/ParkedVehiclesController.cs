@@ -47,6 +47,7 @@ namespace Gitgruppen.Models
             ViewData["TypeSort"] = String.IsNullOrEmpty(sort) ? "typeDesc" : "";
             ViewData["ArrSort"] = sort == "arrived" ? "arrDesc" : "arrived";
             ViewData["LicensePlate"] = licensePlate;
+
            
             var vehicles = from v in _context.ParkedVehicle select v;
 
@@ -67,6 +68,26 @@ namespace Gitgruppen.Models
 
                 case "arrDesc":
                     vehicles = vehicles.OrderByDescending(v => v.Arrived);
+                    break;
+
+                case "color":
+                    vehicles = vehicles.OrderBy(v => v.Color);
+                    break;
+
+                case "brand":
+                    vehicles = vehicles.OrderBy(v => v.Brand);
+                    break;
+
+                case "model":
+                    vehicles = vehicles.OrderBy(v => v.Model);
+                    break;
+
+                case "numberofwheels":
+                    vehicles = vehicles.OrderBy(v => v.NumberOfWheels);
+                    break;
+
+                case "licenseplate":
+                    vehicles = vehicles.OrderBy(v => v.LicensePlate);
                     break;
 
                 default:
@@ -140,8 +161,13 @@ namespace Gitgruppen.Models
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("LicensePlate,Type,Arrived,Color,Brand,Model,NumberOfWheels")] ParkedVehicle parkedVehicle)
         {
+            string opResult;
+            if (ParkedVehicleExists(parkedVehicle.LicensePlate) != true)
+            {
+
             if (ModelState.IsValid)
             {
+                    parkedVehicle.Arrived = DateTime.Now;
                 _context.Add(parkedVehicle);
                 await _context.SaveChangesAsync();
 
@@ -157,10 +183,17 @@ namespace Gitgruppen.Models
                     ParkedTime = parkedVehicle.Arrived - DateTime.Now
 
                 };
-
+                ViewData["opResult"] = "success";
                 return View(nameof(ResultView), overViewModel);
             }
-            return View(parkedVehicle);
+            ViewData["opResult"] = "error";
+            return View(nameof(ResultView), null);
+
+            }else
+            {
+                ViewData["opResult"] = "exists";
+                return View(nameof(ResultView), null);
+            }
         }
 
 
@@ -220,7 +253,23 @@ namespace Gitgruppen.Models
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                var overViewModel = new OverViewModel()
+                {
+                    Type = parkedVehicle.Type,
+                    LicensePlate = parkedVehicle.LicensePlate,
+                    Brand = parkedVehicle.Brand,
+                    Arrived = parkedVehicle.Arrived,
+                    Model = parkedVehicle.Model,
+                    Color = parkedVehicle.Color,
+                    NumberOfWheels = parkedVehicle.NumberOfWheels,
+                    ParkedTime = parkedVehicle.Arrived - DateTime.Now
+
+                };
+
+
+                ViewData["opResult"] = "success";
+                return View(nameof(ResultView), overViewModel);
             }
             return View(parkedVehicle);
         }
@@ -271,6 +320,38 @@ namespace Gitgruppen.Models
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Receipt(string id)
+        {
+            if (id == null || _context.ParkedVehicle == null)
+            {
+                return NotFound();
+            }
 
+            double PricePerHour = 3;
+            var parkedVehicle = await _context.ParkedVehicle.Select(e => new ReceiptModel
+            {
+                Type = e.Type,
+                LicensePlate = e.LicensePlate,
+                Arrived = e.Arrived,
+                Departured = DateTime.Now,
+                HoursParked = Math.Round((DateTime.Now - e.Arrived).TotalHours, 2),
+                ParkedTime = DateTime.Now - e.Arrived,
+            })
+                .FirstOrDefaultAsync(m => m.LicensePlate == id);
+
+            parkedVehicle.ParkingCost = Math.Round(3 + (parkedVehicle.HoursParked * PricePerHour), 2);
+
+            double days = Math.Round(parkedVehicle.ParkedTime.TotalDays);
+            double hours = Math.Round(parkedVehicle.ParkedTime.TotalHours) - (days * 24);
+            double minutes = Math.Round(parkedVehicle.ParkedTime.TotalMinutes) - ((hours + (days * 24)) * 60);
+
+            parkedVehicle.StrParkedTime = days.ToString() + " Days " + hours.ToString() + " Hours " + minutes.ToString() + " Minutes ";
+            if (parkedVehicle == null)
+            {
+                return NotFound();
+            }
+
+            return View(parkedVehicle);
+        }
     }
 }
