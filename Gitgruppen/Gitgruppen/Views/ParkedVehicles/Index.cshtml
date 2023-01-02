@@ -9,16 +9,19 @@
 <p>
     <a class="btn btn-outline-dark" asp-action="Create">Check in Vehicle</a>
 </p>
-<form asp-action="Index" method="get">
-    <div class="form-actions no-color">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder=" Search Licenseplate" name="licensePlate" value="@ViewData["LicensePlate"]" />
-            <input type="submit" value="Search" class="btn btn-success" /> &nbsp;
-            <a class="btn btn-outline-dark text-decoration-none" asp-action="Index">Whole Garage</a>
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder=" Search Licenseplate" name="licensePlate" value="@ViewData["LicensePlate"]" />
+                <input type="submit" value="Search" class="btn btn-success" /> &nbsp;
+                <a class="btn btn-outline-dark text-decoration-none" asp-action="Index">Whole Garage</a>
+            </div>
         </div>
-    </div>
-</form>
-<table class="table">
+    </form>
+<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="addDetailsModal" onclick="showDetatails()">
+        TestModal
+    </button>
+<table class="table" id="ModalTable">
     <thead class="bg-dark bg-opacity-75 text-light text-uppercase text-center">
         <tr>
             <th>
@@ -28,19 +31,19 @@
                 <a class="sortbuttons" asp-action="Index" asp-route-sort="@ViewData["ArrSort"]">@Html.DisplayNameFor(model => model.Arrived)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Color)
+                <a class="sortbuttons" asp-action="Index" asp-route-sort="color">@Html.DisplayNameFor(model => model.Color)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Brand)
+                <a class="sortbuttons" asp-action="Index" asp-route-sort="brand">@Html.DisplayNameFor(model => model.Brand)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Model)
+                <a class="sortbuttons" asp-action="Index" asp-route-sort="model">@Html.DisplayNameFor(model => model.Model)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NumberOfWheels)
+                <a class="sortbuttons" asp-action="Index" asp-route-sort="numberofwheels">@Html.DisplayNameFor(model => model.NumberOfWheels)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LicensePlate)
+                <a class="sortbuttons" asp-action="Index" asp-route-sort="licenseplate">@Html.DisplayNameFor(model => model.LicensePlate)</a>
             </th>
             <th></th>
         </tr>

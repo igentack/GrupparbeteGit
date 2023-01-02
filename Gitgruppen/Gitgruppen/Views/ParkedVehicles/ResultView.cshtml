@@ -1,11 +1,27 @@
 ﻿@model Gitgruppen.Models.OverViewModel
 
 
-@{
-    ViewData["Title"] = "Car checked in";
-}
+
+@{ViewData["Title"] = "Vehicle checked in";}
 
 <h1>Result</h1>
+@if (ViewData["opResult"].Equals("exists"))
+{
+    ViewData["Title"] = "Vehicle already parked";
+    <h3><i>Vehicle already checked in</i></h3>
+}
+@if (ViewData["opResult"].Equals("error"))
+{
+    ViewData["Title"] = "There was an error";
+    <h3><i>There was an error</i></h3>
+}
+
+
+
+@if (ViewData["opResult"].Equals("success"))
+{
+<h3><i>Success</i></h3>
+
 <table class="table">
     <thead class="bg-dark bg-opacity-75 text-light text-uppercase text-center">
         <tr>
@@ -18,37 +34,54 @@
             <th>
                 @Html.DisplayNameFor(model => model.Brand)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Arrived)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ParkedTime)
-            </th>
-
+                <th>
+                    @Html.DisplayNameFor(model => model.Arrived)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Color)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumberOfWheels)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParkedTime)
+                </th>
         </tr>
     </thead>
     <tbody>
             <tr>
                 <td>
-                    @Html.DisplayFor(model => model.Type)
+                @Html.DisplayFor(model => model.Type)
                 </td>
                 <td>
                 @Html.DisplayFor(model => model.LicensePlate)
                 </td>
                 <td>
-                @Html.DisplayFor(model => model.Brand)
+                    @Html.DisplayFor(model => model.Brand)
+                </td>
+                    <td>
+                @Html.DisplayFor(model => model.Arrived)
                 </td>
                 <td>
-                @Html.DisplayFor(model => model.Arrived)
+                    @Html.DisplayFor(model => model.Model)
+                </td>
+                <td>
+        @Html.DisplayFor(model => model.Color)
+                </td>
+                <td>
+        @Html.DisplayFor(model => model.NumberOfWheels)
                 </td>
                 <td>
                 @Html.DisplayFor(model => model.ParkedTime)
                 </td>
-                @*    <td>
-            <a class="btn btn-outline-dark text-decoration-none" asp-action="Edit" asp-route-id="@item.LicensePlate">Modify</a> |
-            <a class="btn btn-outline-dark text-decoration-none" asp-action="Details" asp-route-id="@item.LicensePlate">Details</a> |
-            <a class="btn btn-outline-danger text-decoration-none" asp-action="Delete" asp-route-id="@item.LicensePlate">Check out vehicle</a>
-            </td>*@
             </tr>
     </tbody>
 </table>
+}
+
+<div>
+    <a asp-action="Index" class="btn btn-outline-dark">Back to List</a>
+</div>
