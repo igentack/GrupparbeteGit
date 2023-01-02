@@ -5,13 +5,13 @@
 
         type: "Get",
 
-        url: "/ParkedVehicles/Create",
+        url: "/ParkedVehicles/DetailsModal",
 
         success: function (result) {
 
-            $("#kruxTable").html(result);
+            $("#ModalTable").html(result);
 
-            $("#addkrux").modal('show');
+            $("#addDetailsModal").modal('show');
 
         }
 

@@ -133,7 +133,7 @@ namespace Gitgruppen.Models
         }
         
         // GET: ParkedVehicles/Create
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> DetailsModal()
         {
             var id = "ABC222";
             if (id == null || _context.ParkedVehicle == null)
@@ -148,7 +148,7 @@ namespace Gitgruppen.Models
                 return NotFound();
             }
 
-            return PartialView("krux", parkedVehicle);
+            return PartialView("DetailsModal", parkedVehicle);
         }/*    public IActionResult Create()
         {
             return View();
