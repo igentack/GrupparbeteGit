@@ -345,7 +345,16 @@ namespace Gitgruppen.Models
             double days = Math.Round(parkedVehicle.ParkedTime.TotalDays);
             double hours = Math.Round(parkedVehicle.ParkedTime.TotalHours) - (days * 24);
             double minutes = Math.Round(parkedVehicle.ParkedTime.TotalMinutes) - ((hours + (days * 24)) * 60);
-
+            if (hours<0)
+            {
+                days = days - 1;
+                hours = hours + 60;
+            }
+            if(minutes<0)
+            {
+                hours= hours - 1;
+                minutes = minutes + 60;
+            }
             parkedVehicle.StrParkedTime = days.ToString() + " Days " + hours.ToString() + " Hours " + minutes.ToString() + " Minutes ";
             if (parkedVehicle == null)
             {
