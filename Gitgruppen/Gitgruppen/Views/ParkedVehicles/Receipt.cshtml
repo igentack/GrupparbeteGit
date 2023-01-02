@@ -53,7 +53,7 @@
             @Html.DisplayFor(model => model.ParkingCost) $
         </dd>
     </dl>
-    <form asp-action="Delete">
+    <form asp-action="Delete" asp-route-id="@Model?.LicensePlate">
         <input type="hidden" asp-for="LicensePlate" />
         <input type="submit" value="Check out" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
