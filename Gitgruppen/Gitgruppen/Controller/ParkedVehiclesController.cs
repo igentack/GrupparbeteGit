@@ -132,7 +132,7 @@ namespace Gitgruppen.Models
             return View(parkedVehicle);
         }
         
-        // GET: ParkedVehicles/Create
+        // GET: ParkedVehicles/DetailsModal
         public async Task<IActionResult> DetailsModal()
         {
             var id = "ABC222";
@@ -149,10 +149,11 @@ namespace Gitgruppen.Models
             }
 
             return PartialView("DetailsModal", parkedVehicle);
-        }/*    public IActionResult Create()
+        }
+        public IActionResult Create()
         {
             return View();
-        }*/
+        }
 
         // POST: ParkedVehicles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
