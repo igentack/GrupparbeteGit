@@ -22,15 +22,15 @@ namespace Gitgruppen.Models
         public async Task<IActionResult> OverView()
         {
 
-            if (_context.ParkedVehicle == null)
+            if (_context.Vehicle == null)
             {
                 return NotFound();
             }
 
-            var overViewModel = await _context.ParkedVehicle.Select(e => new OverViewModel
+            var overViewModel = await _context.Vehicle.Select(e => new OverViewModel
             {
 
-                Type = e.Type,
+                Type = Type.Car,
                 LicensePlate = e.LicensePlate,
                 Brand = e.Brand,
                 Arrived= e.Arrived,
@@ -55,7 +55,7 @@ namespace Gitgruppen.Models
             ViewData["LicensePlate"] = licensePlate;
 
            
-            var vehicles = from v in _context.ParkedVehicle select v;
+            var vehicles = from v in _context.Vehicle select v;
 
             if (!String.IsNullOrEmpty(licensePlate))
             {
@@ -65,7 +65,7 @@ namespace Gitgruppen.Models
             switch (sort)
             {
                 case "typeDesc":
-                  vehicles = vehicles.OrderByDescending(v => v.Type);
+                  vehicles = vehicles.OrderByDescending(v => Type.Car);
                     break;
 
                 case "arrived":
@@ -112,7 +112,7 @@ namespace Gitgruppen.Models
                     break;
 
                 default:
-                    vehicles = vehicles.OrderBy(v => v.Type);
+                    vehicles = vehicles.OrderBy(v => Type.Car);
                     break;
             }
 
@@ -120,7 +120,7 @@ namespace Gitgruppen.Models
             var overViewModel = await vehicles.AsNoTracking().Select(e => new OverViewModel
             {
 
-                Type = e.Type,
+                Type = Type.Car,
                 LicensePlate = e.LicensePlate,
                 Brand = e.Brand,
                 Arrived = e.Arrived,
@@ -137,12 +137,12 @@ namespace Gitgruppen.Models
         // GET: ParkedVehicles/Details/5
         public async Task<IActionResult> Details(string id)
         {
-            if (id == null || _context.ParkedVehicle == null)
+            if (id == null || _context.Vehicle == null)
             {
                 return NotFound();
             }
 
-            var parkedVehicle = await _context.ParkedVehicle
+            var parkedVehicle = await _context.Vehicle
                 .FirstOrDefaultAsync(m => m.LicensePlate == id);
             if (parkedVehicle == null)
             {
@@ -157,12 +157,12 @@ namespace Gitgruppen.Models
         public async Task<IActionResult> DetailsModal()
         {
             var id = "ABC222";
-            if (id == null || _context.ParkedVehicle == null)
+            if (id == null || _context.Vehicle == null)
             {
                 return NotFound();
             }
 
-            var parkedVehicle = await _context.ParkedVehicle
+            var parkedVehicle = await _context.Vehicle
                 .FirstOrDefaultAsync(m => m.LicensePlate == id);
             if (parkedVehicle == null)
             {
@@ -226,18 +226,18 @@ namespace Gitgruppen.Models
 
         private bool ParkedVehicleExists(string id)
         {
-          return (_context.ParkedVehicle?.Any(e => e.LicensePlate == id)).GetValueOrDefault();
+          return (_context.Vehicle?.Any(e => e.LicensePlate == id)).GetValueOrDefault();
         }
 
         // GET: ParkedVehicles/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
-            if (id == null || _context.ParkedVehicle == null)
+            if (id == null || _context.Vehicle == null)
             {
                 return NotFound();
             }
 
-            var parkedVehicle = await _context.ParkedVehicle.FindAsync(id);
+            var parkedVehicle = await _context.Vehicle.FindAsync(id);
             if (parkedVehicle == null)
             {
                 return NotFound();
@@ -299,12 +299,12 @@ namespace Gitgruppen.Models
         // GET: ParkedVehicles/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
-            if (id == null || _context.ParkedVehicle == null)
+            if (id == null || _context.Vehicle == null)
             {
                 return NotFound();
             }
 
-            var parkedVehicle = await _context.ParkedVehicle
+            var parkedVehicle = await _context.Vehicle
                 .FirstOrDefaultAsync(m => m.LicensePlate == id);
             if (parkedVehicle == null)
             {
@@ -319,16 +319,16 @@ namespace Gitgruppen.Models
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            if (_context.ParkedVehicle == null)
+            if (_context.Vehicle == null)
             {
                 return Problem("Entity set 'GitgruppenContext.ParkedVehicle'  is null.");
             }
-            var parkedVehicle = await _context.ParkedVehicle.FindAsync(id);
+            var parkedVehicle = await _context.Vehicle.FindAsync(id);
 
             OverViewModel res = new OverViewModel();
             if (parkedVehicle != null)
             {
-                _context.ParkedVehicle.Remove(parkedVehicle);
+                _context.Vehicle.Remove(parkedVehicle);
 
                 res.Arrived = parkedVehicle.Arrived;
                 res.LicensePlate = parkedVehicle.LicensePlate;
@@ -344,15 +344,15 @@ namespace Gitgruppen.Models
 
         public async Task<IActionResult> Receipt(string id)
         {
-            if (id == null || _context.ParkedVehicle == null)
+            if (id == null || _context.Vehicle == null)
             {
                 return NotFound();
             }
 
             double PricePerHour = 3;
-            var parkedVehicle = await _context.ParkedVehicle.Select(e => new ReceiptModel
+            var parkedVehicle = await _context.Vehicle.Select(e => new ReceiptModel
             {
-                Type = e.Type,
+                Type = Type.Car,
                 LicensePlate = e.LicensePlate,
                 Arrived = e.Arrived,
                 Departured = DateTime.Now,

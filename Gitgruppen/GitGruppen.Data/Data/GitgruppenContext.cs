@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using GitGruppen.Core;
 using Microsoft.EntityFrameworkCore;
-using Gitgruppen.Models;
 
 namespace Gitgruppen.Data
 {
@@ -14,7 +10,7 @@ namespace Gitgruppen.Data
         {
         }
 
-        public DbSet<Gitgruppen.Models.ParkedVehicle> ParkedVehicle { get; set; } = default!;
+        public DbSet<Vehicle> Vehicle { get; set; } = default!;
 
     }
 }
