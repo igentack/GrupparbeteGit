@@ -18,7 +18,7 @@ namespace GitGruppen.Core
         public string Member { get; set; }    
 
         [Required]
-        public Vehicle vehicle { get; set; }
+        public Vehicle Vehicle { get; set; }
 
         
     }
