@@ -9,7 +9,7 @@ namespace GitGruppen.Core
 
         public string SpotName { get; set; }
 
-        public Vehicle? vehicle { get; set; }
+        public ICollection<Vehicle>? Vehicles { get; set; }
     }
 }
     

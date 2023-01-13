@@ -7,5 +7,9 @@ namespace GitGruppen.Core
         public string PersNr { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public ICollection<Vehicle> Vehicles { get; set; }
+
+        public ICollection<Receipt> Receipts { get; set; }
     }
 }

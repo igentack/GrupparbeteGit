@@ -8,5 +8,7 @@ namespace GitGruppen.Core
 
         public string Type { get; set; }
         public int NrOfSpaces { get; set; }
+
+        public ICollection<Vehicle> Vehicles { get; set; }
     }
 }

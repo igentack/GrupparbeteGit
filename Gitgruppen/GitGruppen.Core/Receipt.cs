@@ -15,6 +15,11 @@ namespace GitGruppen.Core
         public double TotalCost { get; set; }
 
         [Required]
+        public string Member { get; set; }    
+
+        [Required]
         public Vehicle vehicle { get; set; }
+
+        
     }
 }
