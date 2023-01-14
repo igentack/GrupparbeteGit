@@ -10,11 +10,18 @@ html {
         font-size: 16px;
     }
 }
-
+.navbari {
+    background-color: #374957;
+    color: #A5B6C7;
+}
 a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
+    color: lightsteelblue;
+}
+.test  {
+    background-color: #374957;
 }
 
 a {
@@ -69,13 +76,15 @@ button.accept-policy {
 }
 
 body {
-    background-color: rgb(9, 247, 128);
     margin-bottom: 60px;
+    background: rgb(249,248,244);
+    background: radial-gradient(circle, rgba(249,248,244,0.9864320728291317) 0%, rgba(194,193,191,1) 71%);
+    /*    background-color: rgb(9, 247, 128);
     animation-name: goingOn;
     animation-iteration-count: infinite;
-    animation-duration: 8s;
+    animation-duration: 8s;*/
 }
-
+/*
 @keyframes goingOn {
     0% {
         background-color: rgb(202, 236, 219);
@@ -92,7 +101,7 @@ body {
     100% {
         background-color: rgb(202, 236, 219);
     }
-}
+}*/
 
 
 body > header > nav {
