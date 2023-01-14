@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bogus;
+using Bogus.Extensions.Sweden;
 using Bogus.DataSets;
 using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 using System.Globalization;
@@ -16,6 +17,56 @@ namespace Gitgruppen.Controllers.SeedData
     public class SeedData
     {
         private static Faker faker = null!;
+
+
+        public static async Task AddMembers(GitgruppenContext db, int nrOfMembers)
+        {
+            if(faker == null) faker = new Faker("sv");
+
+            var members = GenerateMembers(nrOfMembers);
+            await db.AddRangeAsync(members);
+            await db.SaveChangesAsync();
+
+        }
+
+        private static IEnumerable<Member> GenerateMembers(int numberOfStudents)
+        {
+            var students = new List<Member>();
+
+            for (int i = 0; i < numberOfStudents; i++)
+            {
+
+                var fkr = new Faker("sv");
+
+                
+                var fName = fkr.Name.FirstName();
+                var lName = fkr.Name.LastName();
+                var persNr = fkr.Person.Personnummer();
+                
+                //var avatar = faker.Internet.Avatar();
+                //var email = faker.Internet.Email(fName, lName, "lexicon.se");
+
+                var member = new Member
+                {
+                    //Avatar = avatar,
+                    PersNr= persNr,
+                    FirstName = fName,
+                    LastName = lName,
+                    //Email = email,
+                    //Address = new Core.Address
+                    //{
+                    //    Street = faker.Address.StreetAddress(),
+                    //    City = faker.Address.City(),
+                    //    ZipCode = faker.Address.ZipCode()
+                    //}
+                };
+
+                students.Add(member);
+            }
+
+            return students;
+        }
+
         public static async Task InitAsync(GitgruppenContext db)
         {
             if (await db.Member.AnyAsync()) return;
@@ -77,36 +128,6 @@ namespace Gitgruppen.Controllers.SeedData
         //    return courses;
         //}
 
-        private static IEnumerable<Member> GenerateMembers(int numberOfStudents)
-        {
-            var students = new List<Member>();
-
-            for (int i = 0; i < numberOfStudents; i++)
-            {
-                var fName = faker.Name.FirstName();
-                var lName = faker.Name.LastName();
-                //var avatar = faker.Internet.Avatar();
-                //var email = faker.Internet.Email(fName, lName, "lexicon.se");
-
-                var member = new Member
-                {
-                    //Avatar = avatar,
-                    FirstName = fName,
-                    LastName = lName,
-                    //Email = email,
-                    //Address = new Core.Address
-                    //{
-                    //    Street = faker.Address.StreetAddress(),
-                    //    City = faker.Address.City(),
-                    //    ZipCode = faker.Address.ZipCode()
-                    //}
-                };
-
-                students.Add(member);
-            }
-
-            return students;
-        }
     }
 }
 

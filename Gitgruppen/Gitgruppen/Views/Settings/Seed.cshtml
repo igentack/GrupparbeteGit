@@ -3,8 +3,13 @@
     ViewData["Title"] = "Seed";
 }
 
-<h1>Seed</h1>
+<h1>Seed @ViewData["AddMembers"] </h1>
 
+<form asp-action="Seed" method="get">
+    <label for="fname">Add members</label>
+    <input type="text" id="AddMembers" name="AddMembers">
+    <input type="submit" value="Submit">
+</form>
 
 Parkings spots
 
