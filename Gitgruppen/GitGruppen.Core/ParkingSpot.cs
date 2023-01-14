@@ -3,7 +3,6 @@ namespace GitGruppen.Core
 {
     public class ParkingSpot
     {
-        [Key]
         public int Id { get; set; }
         public DateTime TimeArrival { get;}
 

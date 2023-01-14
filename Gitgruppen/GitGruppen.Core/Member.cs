@@ -10,8 +10,18 @@ namespace GitGruppen.Core
 
         public string FullName => $"{FirstName} {LastName}";
 
+        public int Age { get; set; }     
+        
+        public Membership Membership { get; set; }
+
         public ICollection<Vehicle> Vehicles { get; set; }
 
         public ICollection<Receipt> Receipts { get; set; }
+    }
+    public enum Membership
+    {
+        Member,
+        Gold,
+        Pro,
     }
 }
