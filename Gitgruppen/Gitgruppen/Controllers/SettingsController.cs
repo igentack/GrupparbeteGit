@@ -8,5 +8,13 @@ namespace Gitgruppen.Controllers
         {
             return View();
         }
+        public IActionResult Seed()
+        {
+            return View();
+        }
+        public IActionResult ParkingSpots()
+        {
+            return View();
+        }
     }
 }
