@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace GitGruppen.Core
 {
-#nullable disable
     public class VehicleType
     {
+        [Key]
         public int Id { get; set; }
 
         public string Type { get; set; }

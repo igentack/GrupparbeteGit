@@ -33,11 +33,11 @@ namespace Gitgruppen.Models
                 Type = Type.Car,
                 LicensePlate = e.LicensePlate,
                 Brand = e.Brand,
-                Arrived = e.Arrived,
+                Arrived= e.Arrived,
                 ParkedTime = e.Arrived - DateTime.Now
 
             }).ToListAsync();
-
+ 
             return View(overViewModel);
         }
 
@@ -54,7 +54,7 @@ namespace Gitgruppen.Models
 
             ViewData["LicensePlate"] = licensePlate;
 
-
+           
             var vehicles = from v in _context.Vehicle select v;
 
             if (!String.IsNullOrEmpty(licensePlate))
@@ -65,7 +65,7 @@ namespace Gitgruppen.Models
             switch (sort)
             {
                 case "typeDesc":
-                    vehicles = vehicles.OrderByDescending(v => Type.Car);
+                  vehicles = vehicles.OrderByDescending(v => Type.Car);
                     break;
 
                 case "arrived":
@@ -124,15 +124,15 @@ namespace Gitgruppen.Models
                 LicensePlate = e.LicensePlate,
                 Brand = e.Brand,
                 Arrived = e.Arrived,
-                Model = e.Model,
-                Color = e.Color,
-                NumberOfWheels = e.NumberOfWheels,
+                Model= e.Model,
+                Color= e.Color,
+                NumberOfWheels= e.NumberOfWheels,
                 ParkedTime = e.Arrived - DateTime.Now
 
             }).ToListAsync();
 
-            return View(overViewModel);
-
+            return View(overViewModel); 
+                       
         }
         // GET: ParkedVehicles/Details/5
         public async Task<IActionResult> Details(string id)
@@ -149,10 +149,10 @@ namespace Gitgruppen.Models
                 return NotFound();
             }
 
-
+          
             return View(parkedVehicle);
         }
-
+        
         // GET: ParkedVehicles/DetailsModal
         public async Task<IActionResult> DetailsModal()
         {
@@ -187,32 +187,31 @@ namespace Gitgruppen.Models
             if (ParkedVehicleExists(parkedVehicle.LicensePlate) != true)
             {
 
-                if (ModelState.IsValid)
-                {
+            if (ModelState.IsValid)
+            {
                     parkedVehicle.Arrived = DateTime.Now;
-                    _context.Add(parkedVehicle);
-                    await _context.SaveChangesAsync();
+                _context.Add(parkedVehicle);
+                await _context.SaveChangesAsync();
 
-                    var overViewModel = new OverViewModel()
-                    {
-                        Type = parkedVehicle.Type,
-                        LicensePlate = parkedVehicle.LicensePlate,
-                        Brand = parkedVehicle.Brand,
-                        Arrived = parkedVehicle.Arrived,
-                        Model = parkedVehicle.Model,
-                        Color = parkedVehicle.Color,
-                        NumberOfWheels = parkedVehicle.NumberOfWheels,
-                        ParkedTime = parkedVehicle.Arrived - DateTime.Now
+                var overViewModel = new OverViewModel()
+                {
+                    Type = parkedVehicle.Type,
+                    LicensePlate = parkedVehicle.LicensePlate,
+                    Brand = parkedVehicle.Brand,
+                    Arrived = parkedVehicle.Arrived,
+                    Model = parkedVehicle.Model,
+                    Color = parkedVehicle.Color,
+                    NumberOfWheels = parkedVehicle.NumberOfWheels,
+                    ParkedTime = parkedVehicle.Arrived - DateTime.Now
 
-                    };
-                    ViewData["opResult"] = "success";
-                    return View(nameof(ResultView), overViewModel);
-                }
-                ViewData["opResult"] = "error";
-                return View(nameof(ResultView), null);
-
+                };
+                ViewData["opResult"] = "success";
+                return View(nameof(ResultView), overViewModel);
             }
-            else
+            ViewData["opResult"] = "error";
+            return View(nameof(ResultView), null);
+
+            }else
             {
                 ViewData["opResult"] = "exists";
                 return View(nameof(ResultView), null);
@@ -227,7 +226,7 @@ namespace Gitgruppen.Models
 
         private bool ParkedVehicleExists(string id)
         {
-            return (_context.Vehicle?.Any(e => e.LicensePlate == id)).GetValueOrDefault();
+          return (_context.Vehicle?.Any(e => e.LicensePlate == id)).GetValueOrDefault();
         }
 
         // GET: ParkedVehicles/Edit/5
@@ -335,9 +334,8 @@ namespace Gitgruppen.Models
                 res.LicensePlate = parkedVehicle.LicensePlate;
                 res.Brand = parkedVehicle.Brand;
 
-            }
-            else res = null;
-
+            } else res = null;
+            
             await _context.SaveChangesAsync();
 
 
@@ -368,14 +366,14 @@ namespace Gitgruppen.Models
             double days = Math.Round(parkedVehicle.ParkedTime.TotalDays);
             double hours = Math.Round(parkedVehicle.ParkedTime.TotalHours) - (days * 24);
             double minutes = Math.Round(parkedVehicle.ParkedTime.TotalMinutes) - ((hours + (days * 24)) * 60);
-            if (minutes < 0)
+            if (minutes<0)
             {
                 hours = hours - 1;
                 minutes = minutes + 60;
             }
-            if (hours < 0)
+            if(hours<0)
             {
-                days = days - 1;
+                days= days - 1;
                 hours = hours + 24;
             }
             parkedVehicle.StrParkedTime = days.ToString() + " Days " + hours.ToString() + " Hours " + minutes.ToString() + " Minutes ";

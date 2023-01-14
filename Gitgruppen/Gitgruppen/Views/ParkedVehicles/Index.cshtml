@@ -9,53 +9,41 @@
 <p>
     <a class="btn btn-outline-dark" asp-action="Create">Check in Vehicle</a>
 </p>
-   
-
-<form asp-action="Index" method="get">
-    <div class="form-actions no-color">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder=" Search Licenseplate" name="licensePlate"
-                   value="@ViewData["LicensePlate"]" />
-
-            <input type="submit" value="Search" class="btn btn-success" /> &nbsp;
-            <a class="btn btn-outline-dark text-decoration-none" asp-action="Index">Whole Garage</a>
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder=" Search Licenseplate" name="licensePlate" value="@ViewData["LicensePlate"]" />
+                <input type="submit" value="Search" class="btn btn-success" /> &nbsp;
+                <a class="btn btn-outline-dark text-decoration-none" asp-action="Index">Whole Garage</a>
+            </div>
         </div>
-    </div>
-</form>
-
-
-<button type="button" class="btn btn-info" data-dismiss="modal"
-        data-bs-target="#addDetailsModal" data-id="@item.LicensePlate" onclick="showDetails()">
-
-        DetailsTestModal
-</button>
-
-
-<table class="table" id="IndexTable">
+    </form>
+@*<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="addDetailsModal" onclick="showDetatails()">
+        TestModal
+    </button>*@
+<table class="table" id="ModalTable">
     <thead class="bg-dark bg-opacity-75 text-light text-uppercase text-center">
         <tr>
             <th>
-                <a class="sortbuttons" asp-action="Index" asp-route-sort="@ViewData["TypeSort"]">
-                @Html.DisplayNameFor(model => model.Type)</a>
+                <a class="sortbuttons" asp-action="Index" asp-route-sort="@ViewData["TypeSort"]">@Html.DisplayNameFor(model => model.Type)</a>
             </th>
             <th>
-                <a class="sortbuttons" asp-action="Index" asp-route-sort="@ViewData["ArrSort"]">
-                @Html.DisplayNameFor(model => model.Arrived)</a>
+                <a class="sortbuttons" asp-action="Index" asp-route-sort="@ViewData["ArrSort"]">@Html.DisplayNameFor(model => model.Arrived)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Color)
+                <a class="sortbuttons" asp-action="Index" asp-route-sort="@ViewData["ColSort"]">@Html.DisplayNameFor(model => model.Color)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Brand)
+                <a class="sortbuttons" asp-action="Index" asp-route-sort="@ViewData["BrandSort"]">@Html.DisplayNameFor(model => model.Brand)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Model)
+                <a class="sortbuttons" asp-action="Index" asp-route-sort="@ViewData["ModelSort"]">@Html.DisplayNameFor(model => model.Model)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NumberOfWheels)
+                <a class="sortbuttons" asp-action="Index" asp-route-sort="@ViewData["WhSort"]">@Html.DisplayNameFor(model => model.NumberOfWheels)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LicensePlate)
+                <a class="sortbuttons" asp-action="Index" asp-route-sort="@ViewData["LicenseSort"]">@Html.DisplayNameFor(model => model.LicensePlate)</a>
             </th>
             <th></th>
         </tr>
@@ -81,14 +69,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NumberOfWheels)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LicensePlate)
-            </td>
-
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicensePlate)
+                </td>
             <td class="float-end border-bottom-0">
                 <a class="btn btn-outline-dark text-decoration-none" asp-action="Edit" asp-route-id="@item.LicensePlate">Modify</a> &nbsp;
-                 @*   <a class="btn btn-outline-dark text-decoration-none" data-bs-toggle="modal"
-                   data-bs-target="#addDetailsModal" onclick="showDetails()">Details</a> &nbsp;*@
                 <a class="btn btn-outline-dark text-decoration-none" asp-action="Details" asp-route-id="@item.LicensePlate">Details</a> &nbsp;
                 <a class="btn btn-outline-danger text-decoration-none" asp-action="Delete" asp-route-id="@item.LicensePlate">Check out vehicle</a>
             </td>

@@ -28,9 +28,11 @@ namespace GitGruppen.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PersNr");
@@ -47,6 +49,7 @@ namespace GitGruppen.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("SpotName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -62,6 +65,10 @@ namespace GitGruppen.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Member")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("MemberPersNr")
                         .HasColumnType("nvarchar(450)");
 
@@ -75,6 +82,7 @@ namespace GitGruppen.Data.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("VehicleLicensePlate")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -95,15 +103,18 @@ namespace GitGruppen.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Brand")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Color")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MemberPersNr")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Model")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumberOfWheels")
@@ -112,7 +123,7 @@ namespace GitGruppen.Data.Migrations
                     b.Property<int?>("ParkingSpotId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("VehicleTypeId")
+                    b.Property<int>("VehicleTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("LicensePlate");
@@ -138,6 +149,7 @@ namespace GitGruppen.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -147,15 +159,15 @@ namespace GitGruppen.Data.Migrations
 
             modelBuilder.Entity("GitGruppen.Core.Receipt", b =>
                 {
-                    b.HasOne("GitGruppen.Core.Member", "Member")
+                    b.HasOne("GitGruppen.Core.Member", null)
                         .WithMany("Receipts")
                         .HasForeignKey("MemberPersNr");
 
                     b.HasOne("GitGruppen.Core.Vehicle", "Vehicle")
-                        .WithMany("Receipts")
-                        .HasForeignKey("VehicleLicensePlate");
-
-                    b.Navigation("Member");
+                        .WithMany()
+                        .HasForeignKey("VehicleLicensePlate")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Vehicle");
                 });
@@ -172,7 +184,9 @@ namespace GitGruppen.Data.Migrations
 
                     b.HasOne("GitGruppen.Core.VehicleType", "VehicleType")
                         .WithMany()
-                        .HasForeignKey("VehicleTypeId");
+                        .HasForeignKey("VehicleTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Member");
 
@@ -189,11 +203,6 @@ namespace GitGruppen.Data.Migrations
             modelBuilder.Entity("GitGruppen.Core.ParkingSpot", b =>
                 {
                     b.Navigation("Vehicles");
-                });
-
-            modelBuilder.Entity("GitGruppen.Core.Vehicle", b =>
-                {
-                    b.Navigation("Receipts");
                 });
 #pragma warning restore 612, 618
         }

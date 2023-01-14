@@ -1,14 +1,13 @@
 ﻿@model Gitgruppen.Models.ParkedVehicle
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Check out vehicle";
 }
 
-<h1>Delete</h1>
+<h1>Check out vehicle</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to check out this vehicle?</h3>
 <div>
-    <h4>ParkedVehicle</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -49,9 +48,16 @@
         </dd>
     </dl>
     
+    <h4>Checkout without receipt </h4>
     <form asp-action="Delete">
         <input type="hidden" asp-for="LicensePlate" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Check out" class="btn btn-danger" />
     </form>
+    <br />
+    <h4>Receipt at checkout </h4>
+    <form asp-action="Receipt" asp-route-id="@Model?.LicensePlate">
+        <input type="hidden" asp-for="LicensePlate" />
+        <input type="submit" value="Receipt" class="btn btn-danger" />
+    </form>
+        <a asp-action="Index" class="btn btn-outline-dark">Back to List</a>
 </div>

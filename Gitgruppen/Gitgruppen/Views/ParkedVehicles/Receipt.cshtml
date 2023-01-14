@@ -1,0 +1,62 @@
+﻿@model Gitgruppen.Models.ReceiptModel
+
+@{
+    ViewData["Title"] = "Receipt";
+}
+
+<h1>Receipt</h1>
+<h6>Cost for parking is 3$ fixed starting cost plus 3$ per hour</h6>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LicensePlate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LicensePlate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Arrived)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Arrived)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Departured)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Departured)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ParkedTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model =>model.StrParkedTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HoursParked)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HoursParked) hours
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ParkingCost)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ParkingCost) $
+        </dd>
+    </dl>
+    <form asp-action="Delete" asp-route-id="@Model?.LicensePlate">
+        <input type="hidden" asp-for="LicensePlate" />
+        <input type="submit" value="Check out" class="btn btn-danger" /> |
+        <a asp-action="Index"class="btn btn-outline-dark">Back to List</a>
+    </form>
+
+</div>

@@ -1,5 +1,5 @@
 ﻿
- function showDetails() {
+ function showDetatails() {
 
     $.ajax({
 
@@ -9,7 +9,7 @@
 
         success: function (result) {
 
-            $("#IndexTable").html(result);
+            $("#ModalTable").html(result);
 
             $("#addDetailsModal").modal('show');
 

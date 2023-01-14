@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace GitGruppen.Core
 {
-#nullable disable
     public class Receipt
     {
-        // Composite Key?
-        public int Id { get; set; }  
+        [Key]
+        public int Id { get; set; }
+
+        
 
         public DateTime TimeDeparture { get; set; }
 
@@ -13,11 +14,10 @@ namespace GitGruppen.Core
 
         public double TotalCost { get; set; }
 
+        [Required]
+        public string Member { get; set; }    
 
-        /*[Required]*/
-        public Member Member { get; set; }    
-
-        /*[Required]*/
+        [Required]
         public Vehicle Vehicle { get; set; }
 
         

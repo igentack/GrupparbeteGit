@@ -2,7 +2,6 @@
 
 namespace GitGruppen.Core
 {
-#nullable disable
     public class Vehicle
     {
         [Key]
@@ -18,8 +17,6 @@ namespace GitGruppen.Core
         public int NumberOfWheels { get; set; }
         public VehicleType VehicleType { get; set; }
         public Member Member { get; set;}
-
-
 
     }
 }

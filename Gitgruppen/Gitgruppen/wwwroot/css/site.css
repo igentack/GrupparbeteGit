@@ -108,18 +108,19 @@ body > header > nav {
     background-color: #1F2C4D;
 }
 
-    body > div > main > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(194,193,191,1);
-        color: black;
-        font-family: 'Malgun Gothic';
-        text-align: center;
-    }
+body > div > main > table > tbody > tr:nth-child(odd) {
+    background-color: lightgrey;
+    color: black;
+    font-family: 'Malgun Gothic';
+    text-align: center;
+   
+}
 
 
 
-    body > div > main > table > tbody > tr:nth-child(even) {
-        background-color: #F8F4E8;
-        color: black;
-        font-family: 'Malgun Gothic';
-        text-align: center;
-    }
+body > div > main > table > tbody > tr:nth-child(even) {
+    background-color: ghostwhite;
+    color: black;
+    font-family: 'Malgun Gothic';
+    text-align: center;
+}
