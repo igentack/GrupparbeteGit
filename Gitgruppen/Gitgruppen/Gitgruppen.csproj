@@ -43,6 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GitGruppen.Core\GitGruppen.Core.csproj" />
     <ProjectReference Include="..\GitGruppen.Data\GitGruppen.Data.csproj" />
   </ItemGroup>
 
