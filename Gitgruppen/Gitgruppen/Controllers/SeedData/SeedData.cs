@@ -153,10 +153,13 @@ namespace Gitgruppen.Controllers.SeedData
                 vehicle.NumberOfWheels = randomGen.Next(6) + 1;
 
                 int j = randomGen.Next(1000);
-                string license2;
-                license2 = j < 100 ? "0" + j.ToString() : j.ToString();
+                string license2 = "";
+                if (j < 10) license2 = "00" + j.ToString();
+                else if (j < 100) license2 = "0" + j.ToString();
+                else license2 = j.ToString();
+
                 vehicle.LicensePlate = (new string(Enumerable.Repeat(chars, 3)
-                .Select(s => s[randomGen.Next(s.Length)]).ToArray())).ToString() + license2;
+                    .Select(s => s[randomGen.Next(s.Length)]).ToArray())).ToString() + license2;
 
                 vehicle.Model = bogusVehicle.Model();
 
