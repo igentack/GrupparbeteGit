@@ -78,39 +78,16 @@ button.accept-policy {
 body {
     margin-bottom: 60px;
     background: rgb(249,248,244);
-    background: radial-gradient(circle, rgba(249,248,244,0.9864320728291317) 0%, rgba(194,193,191,1) 71%);
-    /*    background-color: rgb(9, 247, 128);
-    animation-name: goingOn;
-    animation-iteration-count: infinite;
-    animation-duration: 8s;*/
+    background: radial-gradient(circle, rgba(249,248,244,0.9864320728291317) 0%, rgba(194,193,191,1) 90%);
 }
-/*
-@keyframes goingOn {
-    0% {
-        background-color: rgb(202, 236, 219);
-    }
-
-    25% {
-        background-color: rgb(166, 240, 218);
-    }
-
-    50% {
-        background-color: rgb(204, 218, 167);
-    }
-
-    100% {
-        background-color: rgb(202, 236, 219);
-    }
-}*/
-
 
 body > header > nav {
     background-color: #1F2C4D;
 }
 
 body > div > main > table > tbody > tr:nth-child(odd) {
-    background-color: lightgrey;
-    color: black;
+    background-color: rosybrown;
+    color: white;
     font-family: 'Malgun Gothic';
     text-align: center;
    
