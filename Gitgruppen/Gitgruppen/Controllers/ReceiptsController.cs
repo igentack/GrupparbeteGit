@@ -56,7 +56,7 @@ namespace Gitgruppen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TimeDeparture,TimeArrival,TotalCost,Member")] Receipt receipt)
+        public async Task<IActionResult> Create([Bind("Id,TimeDeparture,TimeArrival,TotalCost")] Receipt receipt)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace Gitgruppen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TimeDeparture,TimeArrival,TotalCost,Member")] Receipt receipt)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TimeDeparture,TimeArrival,TotalCost")] Receipt receipt)
         {
             if (id != receipt.Id)
             {

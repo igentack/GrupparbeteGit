@@ -6,8 +6,7 @@ namespace GitGruppen.Core
         [Key]
         public int Id { get; set; }
 
-        
-
+      
         public DateTime TimeDeparture { get; set; }
 
         public DateTime TimeArrival { get; set; }
@@ -15,11 +14,11 @@ namespace GitGruppen.Core
         public double TotalCost { get; set; }
 
         /*[Required]*/
-        public Member Member { get; set; }    
+      /*  public Member Member { get; set; }*/
 
         /*[Required]*/
-        public Vehicle Vehicle { get; set; }
+        /*public Vehicle Vehicle { get; set; }*/
 
-        
+
     }
 }

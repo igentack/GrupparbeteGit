@@ -44,6 +44,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\ParkedVehicles\Create.cshtml" />
+    <None Include="Views\ParkedVehicles\Delete.cshtml" />
+    <None Include="Views\ParkedVehicles\Details.cshtml" />
+    <None Include="Views\ParkedVehicles\DetailsModal.cshtml" />
+    <None Include="Views\ParkedVehicles\Edit.cshtml" />
+    <None Include="Views\ParkedVehicles\Index.cshtml" />
+    <None Include="Views\ParkedVehicles\OverView.cshtml" />
+    <None Include="Views\ParkedVehicles\Receipt.cshtml" />
+    <None Include="Views\ParkedVehicles\ResultView.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\GitGruppen.Core\GitGruppen.Core.csproj" />
     <ProjectReference Include="..\GitGruppen.Data\GitGruppen.Data.csproj" />
   </ItemGroup>

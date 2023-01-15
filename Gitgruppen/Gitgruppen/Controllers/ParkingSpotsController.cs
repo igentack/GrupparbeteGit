@@ -22,9 +22,8 @@ namespace Gitgruppen.Controllers
         // GET: ParkingSpots
         public async Task<IActionResult> Index()
         {
-              return _context.ParkingSpot != null ? 
-                          View(await _context.ParkingSpot.ToListAsync()) :
-                          Problem("Entity set 'GitgruppenContext.ParkingSpot'  is null.");
+            var gitgruppenContext = _context.ParkingSpot.Include(p => p.Vehicle);
+            return View(await gitgruppenContext.ToListAsync());
         }
 
         // GET: ParkingSpots/Details/5
@@ -36,6 +35,7 @@ namespace Gitgruppen.Controllers
             }
 
             var parkingSpot = await _context.ParkingSpot
+                .Include(p => p.Vehicle)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (parkingSpot == null)
             {
@@ -48,6 +48,7 @@ namespace Gitgruppen.Controllers
         // GET: ParkingSpots/Create
         public IActionResult Create()
         {
+            ViewData["VehicleId"] = new SelectList(_context.Vehicle, "LicensePlate", "LicensePlate");
             return View();
         }
 
@@ -56,7 +57,7 @@ namespace Gitgruppen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SpotName")] ParkingSpot parkingSpot)
+        public async Task<IActionResult> Create([Bind("Id,SpotName,VehicleId")] ParkingSpot parkingSpot)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +65,7 @@ namespace Gitgruppen.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["VehicleId"] = new SelectList(_context.Vehicle, "LicensePlate", "LicensePlate", parkingSpot.VehicleId);
             return View(parkingSpot);
         }
 
@@ -80,6 +82,7 @@ namespace Gitgruppen.Controllers
             {
                 return NotFound();
             }
+            ViewData["VehicleId"] = new SelectList(_context.Vehicle, "LicensePlate", "LicensePlate", parkingSpot.VehicleId);
             return View(parkingSpot);
         }
 
@@ -88,7 +91,7 @@ namespace Gitgruppen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SpotName")] ParkingSpot parkingSpot)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,SpotName,VehicleId")] ParkingSpot parkingSpot)
         {
             if (id != parkingSpot.Id)
             {
@@ -115,6 +118,7 @@ namespace Gitgruppen.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["VehicleId"] = new SelectList(_context.Vehicle, "LicensePlate", "LicensePlate", parkingSpot.VehicleId);
             return View(parkingSpot);
         }
 
@@ -127,6 +131,7 @@ namespace Gitgruppen.Controllers
             }
 
             var parkingSpot = await _context.ParkingSpot
+                .Include(p => p.Vehicle)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (parkingSpot == null)
             {

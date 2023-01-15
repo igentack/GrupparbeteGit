@@ -120,14 +120,14 @@ namespace Gitgruppen.Models
             var overViewModel = await vehicles.AsNoTracking().Select(e => new OverViewModel
             {
 
-                Type = Type.Car,
+               /* Type = Type.Car,*/
                 LicensePlate = e.LicensePlate,
                 Brand = e.Brand,
-                Arrived = e.Arrived,
-                Model= e.Model,
-                Color= e.Color,
-                NumberOfWheels= e.NumberOfWheels,
-                ParkedTime = e.Arrived - DateTime.Now
+          /*      Arrived = e.Arrived,*/
+                Model = e.Model,
+                Color = e.Color,
+                NumberOfWheels = e.NumberOfWheels
+               /* ParkedTime = e.Arrived - DateTime.Now*/
 
             }).ToListAsync();
 
@@ -342,7 +342,7 @@ namespace Gitgruppen.Models
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Receipt(string id)
+        /*public async Task<IActionResult> Receipt(string id)
         {
             if (id == null || _context.Vehicle == null)
             {
@@ -383,6 +383,6 @@ namespace Gitgruppen.Models
             }
 
             return View(parkedVehicle);
-        }
+        }*/
     }
 }

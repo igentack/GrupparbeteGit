@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GitGruppen.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class garage3 : Migration
+    public partial class hansolo : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -39,6 +39,27 @@ namespace GitGruppen.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Receipt",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TimeDeparture = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TimeArrival = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TotalCost = table.Column<double>(type: "float", nullable: false),
+                    MemberPersNr = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Receipt", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Receipt_Member_MemberPersNr",
+                        column: x => x.MemberPersNr,
+                        principalTable: "Member",
+                        principalColumn: "PersNr");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Vehicle",
                 columns: table => new
                 {
@@ -48,48 +69,71 @@ namespace GitGruppen.Data.Migrations
                     Brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NumberOfWheels = table.Column<int>(type: "int", nullable: false),
-                    vehicleTypeId = table.Column<int>(type: "int", nullable: false),
-                    memberPersNr = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    MemberPersNr = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vehicle", x => x.LicensePlate);
                     table.ForeignKey(
-                        name: "FK_Vehicle_Member_memberPersNr",
-                        column: x => x.memberPersNr,
+                        name: "FK_Vehicle_Member_MemberPersNr",
+                        column: x => x.MemberPersNr,
                         principalTable: "Member",
-                        principalColumn: "PersNr",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "PersNr");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ParkingSpot",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SpotName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VehicleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ParkingSpot", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vehicle_VehicleType_vehicleTypeId",
-                        column: x => x.vehicleTypeId,
-                        principalTable: "VehicleType",
-                        principalColumn: "Id",
+                        name: "FK_ParkingSpot_Vehicle_VehicleId",
+                        column: x => x.VehicleId,
+                        principalTable: "Vehicle",
+                        principalColumn: "LicensePlate",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vehicle_memberPersNr",
-                table: "Vehicle",
-                column: "memberPersNr");
+                name: "IX_ParkingSpot_VehicleId",
+                table: "ParkingSpot",
+                column: "VehicleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vehicle_vehicleTypeId",
+                name: "IX_Receipt_MemberPersNr",
+                table: "Receipt",
+                column: "MemberPersNr");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vehicle_MemberPersNr",
                 table: "Vehicle",
-                column: "vehicleTypeId");
+                column: "MemberPersNr");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ParkingSpot");
+
+            migrationBuilder.DropTable(
+                name: "Receipt");
+
+            migrationBuilder.DropTable(
+                name: "VehicleType");
+
+            migrationBuilder.DropTable(
                 name: "Vehicle");
 
             migrationBuilder.DropTable(
                 name: "Member");
-
-            migrationBuilder.DropTable(
-                name: "VehicleType");
         }
     }
 }
