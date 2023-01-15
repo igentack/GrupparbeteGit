@@ -11,6 +11,7 @@ namespace Gitgruppen.Data
         public GitgruppenContext (DbContextOptions<GitgruppenContext> options)
             : base(options)
         {
+            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         public DbSet<Vehicle> Vehicle { get; set; } = default!;

@@ -15,9 +15,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.SpotName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vehicle)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -26,9 +23,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.SpotName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vehicle.LicensePlate)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

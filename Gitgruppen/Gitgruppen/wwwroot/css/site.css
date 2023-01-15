@@ -86,8 +86,8 @@ body > header > nav {
 }
 
 body > div > main > table > tbody > tr:nth-child(odd) {
-    background-color: rosybrown;
-    color: white;
+    background-color: lightgray;
+    color: black;
     font-family: 'Malgun Gothic';
     text-align: center;
    
