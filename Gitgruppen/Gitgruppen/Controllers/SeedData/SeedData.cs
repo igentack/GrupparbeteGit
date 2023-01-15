@@ -134,6 +134,7 @@ namespace Gitgruppen.Controllers.SeedData
             Member[] mbr_ids = members.ToArray();
             VehicleType[] vhcl_ids = vehicleTypes.ToArray();
 
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
             for (int i = 0; i < nrOfVehicles; i++)
             {
@@ -151,7 +152,11 @@ namespace Gitgruppen.Controllers.SeedData
 
                 vehicle.NumberOfWheels = randomGen.Next(6) + 1;
 
-                vehicle.LicensePlate = bogusVehicle.Vin();
+                int j = randomGen.Next(1000);
+                string license2;
+                license2 = j < 100 ? "0" + j.ToString() : j.ToString();
+                vehicle.LicensePlate = (new string(Enumerable.Repeat(chars, 3)
+                .Select(s => s[randomGen.Next(s.Length)]).ToArray())).ToString() + license2;
 
                 vehicle.Model = bogusVehicle.Model();
 
@@ -161,6 +166,44 @@ namespace Gitgruppen.Controllers.SeedData
             }
 
             return vehicles;
+        }
+
+        internal static async Task AddGarage(GitgruppenContext db)
+        {
+            //4 vehicle types, 50 vehicles, 50 members, 50 parking spots
+            db.VehicleType.Add(new VehicleType
+            {
+                NrOfSpaces = 1,
+                Type = "Car"
+            });
+            db.VehicleType.Add(new VehicleType
+            {
+                NrOfSpaces = 1,
+                Type = "Boat"
+            });
+            db.VehicleType.Add(new VehicleType
+            {
+                NrOfSpaces = 1,
+                Type = "Motorcycle"
+            });
+            db.VehicleType.Add(new VehicleType
+            {
+                NrOfSpaces = 1,
+                Type = "Airplane"
+            });
+            await AddParkingSpots(db, 50);
+            await AddMembers(db, 50);
+            await AddVehicles(db, 50);
+        }
+
+        internal static async Task DropDatabase(GitgruppenContext context)
+        {
+            context.Member.RemoveRange(context.Member.ToList());
+            context.Vehicle.RemoveRange(context.Vehicle.ToList());
+            context.VehicleType.RemoveRange(context.VehicleType.ToList());
+            context.Receipt.RemoveRange(context.Receipt.ToList());
+            context.ParkingSpot.RemoveRange(context.ParkingSpot.ToList());
+            context.SaveChangesAsync();
         }
 
         //private static IEnumerable<Enrollment> GenerateEnrollments(IEnumerable<Course> courses, IEnumerable<Student> students)
