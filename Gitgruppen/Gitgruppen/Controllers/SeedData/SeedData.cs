@@ -85,6 +85,36 @@ namespace Gitgruppen.Controllers.SeedData
             await db.SaveChangesAsync();
         }
 
+        internal static async Task AddParkingSpots(GitgruppenContext db, int nrOfParkingSpots)
+        {
+            if (faker == null) faker = new Faker("sv");
+
+            var parkingsSpots = GenerateParkingSpots(nrOfParkingSpots);
+            await db.AddRangeAsync(parkingsSpots);
+            await db.SaveChangesAsync();
+        }
+
+        private static IEnumerable<ParkingSpot> GenerateParkingSpots(int nrOfParkingSpots)
+        {
+            List<ParkingSpot> parkingSpots = new List<ParkingSpot>();
+
+            for (int i = 0; i < nrOfParkingSpots; i++)
+            {
+                ParkingSpot parkingSpot = new ParkingSpot();
+                string name_1 = (i / 2 + 1).ToString();
+                string name_2 = (i % 2 == 0) ? "A" : "B";
+                parkingSpot.SpotName = name_1 + name_2;
+                parkingSpots.Add(parkingSpot);
+            }
+
+            return parkingSpots;
+        }
+
+        internal static Task AddVehicles(GitgruppenContext context, int nrOfVehicles)
+        {
+            throw new NotImplementedException();
+        }
+
         //private static IEnumerable<Enrollment> GenerateEnrollments(IEnumerable<Course> courses, IEnumerable<Student> students)
         //{
         //    var rnd = new Random();
