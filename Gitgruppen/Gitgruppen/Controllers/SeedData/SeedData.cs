@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 using System.Globalization;
 using Gitgruppen.Data;
 using GitGruppen.Core;
+using System.Drawing;
 
 namespace Gitgruppen.Controllers.SeedData
 {
@@ -110,9 +111,56 @@ namespace Gitgruppen.Controllers.SeedData
             return parkingSpots;
         }
 
-        internal static Task AddVehicles(GitgruppenContext context, int nrOfVehicles)
+        internal static async Task AddVehicles(GitgruppenContext db, int nrOfVehicles)
         {
-            throw new NotImplementedException();
+            if (faker == null) faker = new Faker("sv");
+
+            
+
+            var parkingsSpots = GenerateVehicles( db.Member, db.VehicleType, nrOfVehicles);
+            await db.AddRangeAsync(parkingsSpots);
+            await db.SaveChangesAsync();
+        }
+
+        private static IEnumerable<GitGruppen.Core.Vehicle> GenerateVehicles(DbSet<Member> members, DbSet<VehicleType> vehicleTypes, int nrOfVehicles)
+        {
+            List<GitGruppen.Core.Vehicle> vehicles = new List<GitGruppen.Core.Vehicle>();
+            Faker fkr = new Faker("sv");
+
+
+            Random randomGen = new Random();
+            KnownColor[] names = (KnownColor[])Enum.GetValues(typeof(KnownColor));
+
+            Member[] mbr_ids = members.ToArray();
+            VehicleType[] vhcl_ids = vehicleTypes.ToArray();
+
+
+            for (int i = 0; i < nrOfVehicles; i++)
+            {
+                Bogus.DataSets.Vehicle bogusVehicle = fkr.Vehicle;
+                GitGruppen.Core.Vehicle vehicle = new GitGruppen.Core.Vehicle();
+
+                KnownColor randomColorName = names[randomGen.Next(names.Length)];
+                vehicle.Color = Color.FromKnownColor(randomColorName).Name;
+
+                vehicle.Brand = bogusVehicle.Manufacturer();
+
+                vehicle.Arrived = fkr.Date.Past(1, DateTime.Now);                
+                
+                vehicle.Member = mbr_ids[randomGen.Next(mbr_ids.Length)];
+
+                vehicle.NumberOfWheels = randomGen.Next(6) + 1;
+
+                vehicle.LicensePlate = bogusVehicle.Vin();
+
+                vehicle.Model = bogusVehicle.Model();
+
+                vehicle.VehicleType = vhcl_ids[randomGen.Next(vhcl_ids.Length)];
+
+                vehicles.Add(vehicle);
+            }
+
+            return vehicles;
         }
 
         //private static IEnumerable<Enrollment> GenerateEnrollments(IEnumerable<Course> courses, IEnumerable<Student> students)
