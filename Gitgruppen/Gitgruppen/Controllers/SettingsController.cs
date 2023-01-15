@@ -2,6 +2,7 @@
 using Bogus.Extensions.Sweden;
 using Gitgruppen.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Gitgruppen.Controllers
 {
@@ -44,9 +45,12 @@ namespace Gitgruppen.Controllers
         }
 
 
-        public IActionResult ParkingSpots()
+        public async Task<IActionResult> ParkingSpots()
         {
-            return View();
+            return _context.ParkingSpot != null ?
+            View(await _context.ParkingSpot.ToListAsync()) :
+            Problem("Entity set 'GitgruppenContext.ParkingSpot'  is null.");
+
         }
     }
 }
