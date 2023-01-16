@@ -22,9 +22,9 @@ namespace Gitgruppen.Controllers
         // GET: Receipts
         public async Task<IActionResult> Index()
         {
-              return _context.Receipt != null ? 
-                          View(await _context.Receipt.ToListAsync()) :
-                          Problem("Entity set 'GitgruppenContext.Receipt'  is null.");
+            return _context.Receipt != null ?
+                        View(await _context.Receipt.ToListAsync()) :
+                        Problem("Entity set 'GitgruppenContext.Receipt'  is null.");
         }
 
         // GET: Receipts/Details/5
@@ -150,14 +150,14 @@ namespace Gitgruppen.Controllers
             {
                 _context.Receipt.Remove(receipt);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ReceiptExists(int id)
         {
-          return (_context.Receipt?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Receipt?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

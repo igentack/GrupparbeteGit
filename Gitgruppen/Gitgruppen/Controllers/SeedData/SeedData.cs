@@ -102,9 +102,9 @@ namespace Gitgruppen.Controllers.SeedData
             for (int i = 0; i < nrOfParkingSpots; i++)
             {
                 ParkingSpot parkingSpot = new ParkingSpot();
-                string name_1 = (i / 2 + 1).ToString();
-                string name_2 = (i % 2 == 0) ? "A" : "B";
-                parkingSpot.SpotName = name_1 + name_2;
+                int name_1 = (i / 2 + 1);
+                int name_2 = (i % 2 == 0) ? 6 : 9;
+                parkingSpot.SpotNo = name_1 + name_2; 
                 parkingSpots.Add(parkingSpot);
             }
 
@@ -163,7 +163,7 @@ namespace Gitgruppen.Controllers.SeedData
 
                 vehicle.Model = bogusVehicle.Model();
 
-                vehicle.VehicleType = vhcl_ids[randomGen.Next(vhcl_ids.Length)];
+                // vehicle.VehicleType = vhcl_ids[randomGen.Next(vhcl_ids.Length)];
 
                 vehicles.Add(vehicle);
             }

@@ -5,7 +5,7 @@ namespace GitGruppen.Core
     public class Vehicle
     {
         [Key]
-        public string LicensePlate { get; set; } 
+        public string LicensePlate { get; set; }
 
         [Display(Name = "Arrived Date")]
         public DateTime Arrived { get; set; }
@@ -15,11 +15,12 @@ namespace GitGruppen.Core
         public string Model { get; set; }
 
         public int NumberOfWheels { get; set; }
-        public VehicleType VehicleType { get; set; }
-        public Member Member { get; set;}
+        public int VehicleTypeId { get; set; }
+        public Member Member { get; set; }
 
-        public ParkingSpot ParkingSpot { get; set; }  
-         
+        public int ParkingSpotId { get; set; }
+
+
 
     }
 }
