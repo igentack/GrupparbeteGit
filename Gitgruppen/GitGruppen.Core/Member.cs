@@ -17,13 +17,34 @@ namespace GitGruppen.Core
 
         public ICollection<Receipt> Receipts { get; set; }
 
-        public Boolean isValid(string pnr)
+        public Boolean isValid()
+        {
+            Regex regex = new Regex(@"^(\d{10}|\d{12}|\d{6}-\d{4}|\d{8}-\d{4}|\d{8} \d{4}|\d{6} \d{4})");
+
+            MatchCollection matches = regex.Matches(PersNr);
+
+            if (matches.Count == 0)
+            {
+                return false;
+            }
+            if (FirstName == LastName)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        public Boolean isValid(string pnr, string firstName, string lastName)
         {
             Regex regex = new Regex(@"^(\d{10}|\d{12}|\d{6}-\d{4}|\d{8}-\d{4}|\d{8} \d{4}|\d{6} \d{4})");
 
             MatchCollection matches = regex.Matches(pnr);
 
             if (matches.Count == 0)
+            {
+                return false;
+            }
+            if (firstName == lastName)
             {
                 return false;
             }
