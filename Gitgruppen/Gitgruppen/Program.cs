@@ -31,7 +31,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=ParkedVehicles}/{action=Index}/{id?}");
+    pattern: "{controller=GarageManager}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 
