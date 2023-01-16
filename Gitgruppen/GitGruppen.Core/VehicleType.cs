@@ -6,9 +6,9 @@ namespace GitGruppen.Core
         [Key]
         public int Id { get; set; }
 
-        public string Type { get; set; }
+        public string? Type { get; set; }
         public int NrOfSpaces { get; set; }
 
-        public ICollection<Vehicle> Vehicles { get; set; }
+        public ICollection<Vehicle>? Vehicles { get; set; }
     }
 }

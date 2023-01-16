@@ -4,7 +4,7 @@ namespace Gitgruppen.Models
 {
     public class OverViewModel
     {
-        public Type Type { get; set; }
+        public string Type { get; set; }
         
         [Key]
         public string? LicensePlate { get; set; }
