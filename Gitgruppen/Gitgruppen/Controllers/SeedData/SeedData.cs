@@ -199,13 +199,10 @@ namespace Gitgruppen.Controllers.SeedData
             await AddVehicles(db, 50);
         }
 
-        internal static async Task DropDatabase(GitgruppenContext context)
+        internal static async Task DropGarage(GitgruppenContext context)
         {
-            context.Member.RemoveRange(context.Member.ToList());
-            context.Vehicle.RemoveRange(context.Vehicle.ToList());
-            context.VehicleType.RemoveRange(context.VehicleType.ToList());
-            context.Receipt.RemoveRange(context.Receipt.ToList());
-            context.ParkingSpot.RemoveRange(context.ParkingSpot.ToList());
+            context.Database.EnsureDeleted();
+            context.Database.Migrate();
             context.SaveChangesAsync();
         }
 
