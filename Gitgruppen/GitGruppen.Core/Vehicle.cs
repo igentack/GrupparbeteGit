@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace GitGruppen.Core
 {
@@ -19,7 +20,34 @@ namespace GitGruppen.Core
         public Member Member { get; set;}
 
         public ParkingSpot ParkingSpot { get; set; }  
-         
+
+        public Boolean isValid()
+        {
+            Regex regex = new Regex(@"(\w{3}-\d{3}|\w{3}\d{3}|\w{3} \d{3})");
+
+            MatchCollection matches = regex.Matches(LicensePlate);
+
+            if (matches.Count == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        public Boolean isValid(string licensePlate)
+        {
+            Regex regex = new Regex(@"(\w{3}-\d{3}|\w{3}\d{3}|\w{3} \d{3})");
+
+            MatchCollection matches = regex.Matches(licensePlate);
+
+            if (matches.Count == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
 
     }
 }
