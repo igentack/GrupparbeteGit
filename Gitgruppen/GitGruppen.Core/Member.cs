@@ -15,7 +15,7 @@ namespace GitGruppen.Core
 
         public ICollection<Vehicle> Vehicles { get; set; }
 
-        public ICollection<Receipt> Receipts { get; set; }
+      /*  public ICollection<Receipt> Receipts { get; set; }*/
 
         public Boolean isValid()
         {
