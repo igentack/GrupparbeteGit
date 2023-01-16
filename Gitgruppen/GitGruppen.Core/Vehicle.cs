@@ -15,10 +15,10 @@ namespace GitGruppen.Core
         public string Model { get; set; }
 
         public int NumberOfWheels { get; set; }
-       /* public VehicleType VehicleType { get; set; }
+        public VehicleType VehicleType { get; set; }
         public Member Member { get; set;}
 
-        public ParkingSpot ParkingSpot { get; set; }  */
+        public ParkingSpot ParkingSpot { get; set; }  
          
 
     }
