@@ -9,7 +9,9 @@ namespace GitGruppen.Core
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public string FullName => $"{FirstName} {LastName}";
+        public string FullName => $"{FirstName} {LastName}";  
+        
+       /* public Membership Membership { get; set; }*/
 
         public ICollection<Vehicle> Vehicles { get; set; }
 
@@ -29,4 +31,10 @@ namespace GitGruppen.Core
             return true;
         }
     }
+  /*  public enum Membership
+    {
+        Member,
+        Gold,
+        Pro,
+    }*/
 }
