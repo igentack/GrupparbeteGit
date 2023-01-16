@@ -20,7 +20,7 @@ namespace Gitgruppen.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Seed(string AddMembers, string AddParkingSpots, string AddVehicles, string AddGarage, string DropDatabase)
+        public async Task<IActionResult> Seed(string AddMembers, string AddParkingSpots, string AddVehicles, string AddGarage, string DropGarage)
         {
             int nrOfMembers;
             if(AddMembers != null) if (int.TryParse(AddMembers, out nrOfMembers)){
@@ -48,9 +48,9 @@ namespace Gitgruppen.Controllers
                     ViewData["Result"] = $"Added a new garage";
                 }
 
-            if (AddVehicles != null) if (DropDatabase.Equals("true"))
+            if (DropGarage != null) if (DropGarage.Equals("true"))
                 {
-                    await SeedData.SeedData.DropDatabase(_context);
+                    await SeedData.SeedData.DropGarage(_context);
                     ViewData["Result"] = $"Database was dropped";
                 }
             return View();
