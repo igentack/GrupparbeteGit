@@ -18,7 +18,8 @@ namespace Gitgruppen.Data
         public DbSet<Member> Member { get; set; } = default!;
         public DbSet<VehicleType> VehicleType { get; set; } = default!;
         public DbSet<ParkingSpot> ParkingSpot { get; set; } = default!;
-        public DbSet<Receipt> Receipt { get; set; } = default!;
+       
+
 
     }
 }

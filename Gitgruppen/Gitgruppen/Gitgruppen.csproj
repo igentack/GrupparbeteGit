@@ -8,12 +8,16 @@
 
   <ItemGroup>
     <Compile Remove="Pages\**" />
+    <Compile Remove="Views\ParkedVehicles\**" />
     <Compile Remove="wwwroot\images\**" />
     <Content Remove="Pages\**" />
+    <Content Remove="Views\ParkedVehicles\**" />
     <Content Remove="wwwroot\images\**" />
     <EmbeddedResource Remove="Pages\**" />
+    <EmbeddedResource Remove="Views\ParkedVehicles\**" />
     <EmbeddedResource Remove="wwwroot\images\**" />
     <None Remove="Pages\**" />
+    <None Remove="Views\ParkedVehicles\**" />
     <None Remove="wwwroot\images\**" />
   </ItemGroup>
 
@@ -41,18 +45,6 @@
     <Folder Include="wwwroot\lib\jquery-validation\dist\" />
     <Folder Include="wwwroot\lib\jquery\" />
     <Folder Include="wwwroot\lib\jquery\dist\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Views\ParkedVehicles\Create.cshtml" />
-    <None Include="Views\ParkedVehicles\Delete.cshtml" />
-    <None Include="Views\ParkedVehicles\Details.cshtml" />
-    <None Include="Views\ParkedVehicles\DetailsModal.cshtml" />
-    <None Include="Views\ParkedVehicles\Edit.cshtml" />
-    <None Include="Views\ParkedVehicles\Index.cshtml" />
-    <None Include="Views\ParkedVehicles\OverView.cshtml" />
-    <None Include="Views\ParkedVehicles\Receipt.cshtml" />
-    <None Include="Views\ParkedVehicles\ResultView.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
