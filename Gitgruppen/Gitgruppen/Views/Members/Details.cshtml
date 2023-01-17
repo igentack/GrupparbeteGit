@@ -33,6 +33,9 @@
                Arrived
             </th>
             <th>
+                Type
+            </th>
+            <th>
                 Color
             </th>
             <th>
@@ -55,6 +58,9 @@
                     @Html.DisplayFor(modelItem => item.Arrived)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.VehicleType.Type)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Color)
                 </td>
                 <td>
@@ -67,9 +73,9 @@
                     @Html.DisplayFor(modelItem => item.NumberOfWheels)
                 </td>
                 <td>
-                    @*<a asp-action="Edit" asp-route-id="@item.LicensePlate">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.LicensePlate">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.LicensePlate">Delete</a>*@
+                    <a asp-controller="Vehicles" asp-action="Edit" asp-route-id="@item.LicensePlate">Edit</a> |
+                    <a asp-controller="Vehicles" asp-action="Details" asp-route-id="@item.LicensePlate">Details</a> |
+                    <a asp-controller="Vehicles" asp-action="Delete" asp-route-id="@item.LicensePlate">Delete</a>
                 </td>
             </tr>
         }

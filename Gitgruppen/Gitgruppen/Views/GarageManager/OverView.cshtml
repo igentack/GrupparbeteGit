@@ -16,6 +16,10 @@
                 Member    
             </th>
             <th>
+                Mem. Reg. Veh.
+            </th>
+
+            <th>
                 @Html.DisplayNameFor(model => model.Type)
             </th>
             <th>
@@ -39,6 +43,10 @@
             <td>
                     <a asp-controller="Members" asp-action="Details" asp-route-id="@item.Member.PersNr">@Html.DisplayFor(modelItem => item.Member.FullName)</a>
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberHasNrVehicles)
+                </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Type)
             </td>

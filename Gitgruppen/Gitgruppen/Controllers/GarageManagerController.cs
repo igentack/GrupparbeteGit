@@ -27,12 +27,12 @@ namespace Gitgruppen.Controllers
             var overViewModel = await _context.Vehicle.Select(e => new OverViewModel
             {
                 Member = e.Member,
+                MemberHasNrVehicles = e.Member.Vehicles.Count,
                 Type = e.VehicleType.Type,
                 LicensePlate = e.LicensePlate,
                 Brand = e.Brand,
                 Arrived = e.Arrived,
                 ParkedTime = e.Arrived - DateTime.Now
-
             }).ToListAsync();
 
             return View(overViewModel);

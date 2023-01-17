@@ -7,6 +7,8 @@ namespace Gitgruppen.Models
     {
         public Member Member { get; set; }
 
+        public int MemberHasNrVehicles { get; set; }
+
         public String Type { get; set; }
         
         [Key]
