@@ -8,6 +8,6 @@ namespace Gitgruppen.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public ICollection<Vehicle> Vehicles { get; set; }
+        public ICollection<VehicleView> Vehicles { get; set; }
     }
 }

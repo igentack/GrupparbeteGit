@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using GitGruppen.Core;
 using Gitgruppen.Data;
 using Gitgruppen.Models;
+using Bogus.DataSets;
+using System.ComponentModel.DataAnnotations;
 
 namespace Gitgruppen.Controllers
 {
@@ -54,7 +56,20 @@ namespace Gitgruppen.Controllers
                 PersNr = member.PersNr,
                 FirstName = member.FirstName,
                 LastName = member.LastName,
-                Vehicles = _context.Vehicle.Where(e => e.Member.PersNr == member.PersNr).ToList()
+                Vehicles = _context.Vehicle.Where(e => e.Member.PersNr == member.PersNr).Select(e => new VehicleView
+                {
+                      LicensePlate = e.LicensePlate,
+                      Arrived = e.Arrived,
+                      Color = e.Color,
+                      Brand = e.Brand,
+                      Model = e.Model,
+                      NumberOfWheels = e.NumberOfWheels,
+                      VehicleTypeId = e.VehicleTypeId,
+                      VehicleTypeName = e.VehicleType.Type,
+                      VehicleType = e.VehicleType,
+                      Member = e.Member,
+                      ParkingSpotId = e.ParkingSpotId
+    }).ToList()
             };
 
             return View(mdv);
