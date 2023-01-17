@@ -4,6 +4,7 @@ using Gitgruppen.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GitGruppen.Data.Migrations
 {
     [DbContext(typeof(GitgruppenContext))]
-    partial class GitgruppenContextModelSnapshot : ModelSnapshot
+    [Migration("20230117124621_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,7 +119,7 @@ namespace GitGruppen.Data.Migrations
                     b.Property<int>("NumberOfWheels")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ParkingSpotId")
+                    b.Property<int>("ParkingSpotId")
                         .HasColumnType("int");
 
                     b.Property<int>("VehicleTypeId")
@@ -127,8 +130,7 @@ namespace GitGruppen.Data.Migrations
                     b.HasIndex("MemberPersNr");
 
                     b.HasIndex("ParkingSpotId")
-                        .IsUnique()
-                        .HasFilter("[ParkingSpotId] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("VehicleTypeId");
 
@@ -181,9 +183,11 @@ namespace GitGruppen.Data.Migrations
 
                     b.HasOne("GitGruppen.Core.ParkingSpot", "ParkingSpot")
                         .WithOne("Vehicle")
-                        .HasForeignKey("GitGruppen.Core.Vehicle", "ParkingSpotId");
+                        .HasForeignKey("GitGruppen.Core.Vehicle", "ParkingSpotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("GitGruppen.Core.VehicleType", "VehicleType")
+                    b.HasOne("GitGruppen.Core.VehicleType", null)
                         .WithMany("Vehicles")
                         .HasForeignKey("VehicleTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -192,8 +196,6 @@ namespace GitGruppen.Data.Migrations
                     b.Navigation("Member");
 
                     b.Navigation("ParkingSpot");
-
-                    b.Navigation("VehicleType");
                 });
 
             modelBuilder.Entity("GitGruppen.Core.Member", b =>

@@ -4,6 +4,7 @@ using Gitgruppen.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GitGruppen.Data.Migrations
 {
     [DbContext(typeof(GitgruppenContext))]
-    partial class GitgruppenContextModelSnapshot : ModelSnapshot
+    [Migration("20230117133602_init2")]
+    partial class init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,7 +186,7 @@ namespace GitGruppen.Data.Migrations
                         .WithOne("Vehicle")
                         .HasForeignKey("GitGruppen.Core.Vehicle", "ParkingSpotId");
 
-                    b.HasOne("GitGruppen.Core.VehicleType", "VehicleType")
+                    b.HasOne("GitGruppen.Core.VehicleType", null)
                         .WithMany("Vehicles")
                         .HasForeignKey("VehicleTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -192,8 +195,6 @@ namespace GitGruppen.Data.Migrations
                     b.Navigation("Member");
 
                     b.Navigation("ParkingSpot");
-
-                    b.Navigation("VehicleType");
                 });
 
             modelBuilder.Entity("GitGruppen.Core.Member", b =>
