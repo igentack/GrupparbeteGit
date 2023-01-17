@@ -5,7 +5,11 @@ namespace GitGruppen.Core
     public class Member
     {
         [Key]
+        [Required]
+        [RegularExpression(@"^(\d{10}|\d{12}|\d{6}-\d{4}|\d{8}-\d{4}|\d{8} \d{4}|\d{6} \d{4})$",
+            ErrorMessage = "Not a proper Personnummer")]
         public string PersNr { get; set; }
+        [Required]
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
@@ -19,7 +23,7 @@ namespace GitGruppen.Core
 
         public Boolean isValid()
         {
-            Regex regex = new Regex(@"^(\d{10}|\d{12}|\d{6}-\d{4}|\d{8}-\d{4}|\d{8} \d{4}|\d{6} \d{4})");
+            Regex regex = new Regex(@"^(\d{10}|\d{12}|\d{6}-\d{4}|\d{8}-\d{4}|\d{8} \d{4}|\d{6} \d{4})$");
 
             MatchCollection matches = regex.Matches(PersNr);
 

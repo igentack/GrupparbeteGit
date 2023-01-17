@@ -6,6 +6,9 @@ namespace GitGruppen.Core
     public class Vehicle
     {
         [Key]
+        [Required]
+        [RegularExpression(@"(\w{3}-\d{3}|\w{3}\d{3}|\w{3} \d{3})$",
+            ErrorMessage = "Not a proper Licence Plate")]
         public string LicensePlate { get; set; }
 
         [Display(Name = "Arrived Date")]
