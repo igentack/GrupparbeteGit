@@ -11,7 +11,8 @@ html {
     }
 }
 .navbari {
-    background-color: #374957;
+    background-color: #013a4c;
+    height: 60px;
     color: #A5B6C7;
 }
 a.navbar-brand {
@@ -20,8 +21,10 @@ a.navbar-brand {
     word-break: break-all;
     color: lightsteelblue;
 }
-.test  {
-    background-color: #374957;
+.test {
+    background-color: #304242;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
 }
 
 a {  
@@ -117,11 +120,17 @@ body > div > main > table > tbody > tr:nth-child(odd) {
    
 }
 
-
-
 body > div > main > table > tbody > tr:nth-child(even) {
     background-color: ghostwhite;
     color: black;
     font-family: 'Malgun Gothic';
     text-align: center;
+}
+.footer {
+    color: black;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: rgba(165, 207, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.4px);
+    -webkit-backdrop-filter: blur(10.4px);
 }
