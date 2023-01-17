@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GitGruppen.Core;
+using System.ComponentModel.DataAnnotations;
 
 namespace Gitgruppen.Models
 {
     public class OverViewModel
     {
+        public Member Member { get; set; }
+
         public String Type { get; set; }
         
         [Key]

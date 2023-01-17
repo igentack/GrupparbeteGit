@@ -13,6 +13,9 @@
     <thead class="bg-dark bg-opacity-75 text-light text-uppercase text-center">
         <tr>
             <th>
+                Member    
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Type)
             </th>
             <th>
@@ -33,6 +36,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                    <a asp-controller="Members" asp-action="Details" asp-route-id="@item.Member.PersNr">@Html.DisplayFor(modelItem => item.Member.FullName)</a>
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Type)
             </td>

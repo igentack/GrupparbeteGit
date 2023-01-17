@@ -26,8 +26,8 @@ namespace Gitgruppen.Controllers
 
             var overViewModel = await _context.Vehicle.Select(e => new OverViewModel
             {
-
-                Type = _context.VehicleType.Select(e => e.Type).First(),
+                Member = e.Member,
+                Type = e.VehicleType.Type,
                 LicensePlate = e.LicensePlate,
                 Brand = e.Brand,
                 Arrived = e.Arrived,
