@@ -24,7 +24,13 @@ namespace Gitgruppen.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.Member != null ? 
-                          View(await _context.Member.ToListAsync()) :
+                          View(await _context.Member.Select(e => new MemberView
+                          {
+                              PersNr = e.PersNr,
+                              FirstName= e.FirstName,
+                              LastName= e.LastName,
+                              MemberHasNrVehicles = e.Vehicles.Count
+                          }).ToListAsync()) :
                           Problem("Entity set 'GitgruppenContext.Member'  is null.");
         }
 
