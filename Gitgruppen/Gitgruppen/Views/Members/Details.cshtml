@@ -1,4 +1,4 @@
-﻿@model GitGruppen.Core.Member
+﻿@model MemberDetailsView
 
 @{
     ViewData["Title"] = "Details";
@@ -24,6 +24,60 @@
         </dd>
     </dl>
 </div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Arrived
+            </th>
+            <th>
+                Color
+            </th>
+            <th>
+                Brand
+            </th>
+            <th>
+                Model
+            </th>
+            <th>
+                NumberOfWheels
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Vehicles)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Arrived)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfWheels)
+                </td>
+                <td>
+                    @*<a asp-action="Edit" asp-route-id="@item.LicensePlate">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.LicensePlate">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.LicensePlate">Delete</a>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.PersNr">Edit</a> |
     <a asp-action="Index">Back to List</a>

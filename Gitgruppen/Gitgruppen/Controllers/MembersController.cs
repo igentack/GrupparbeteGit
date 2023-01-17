@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GitGruppen.Core;
 using Gitgruppen.Data;
+using Gitgruppen.Models;
 
 namespace Gitgruppen.Controllers
 {
@@ -42,7 +43,15 @@ namespace Gitgruppen.Controllers
                 return NotFound();
             }
 
-            return View(member);
+            MemberDetailsView mdv = new MemberDetailsView
+            {
+                PersNr = member.PersNr,
+                FirstName = member.FirstName,
+                LastName = member.LastName,
+                Vehicles = _context.Vehicle.Where(e => e.Member.PersNr == member.PersNr).ToList()
+            };
+
+            return View(mdv);
         }
 
         // GET: Members/Create
