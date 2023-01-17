@@ -20,6 +20,87 @@ namespace Gitgruppen.Controllers.SeedData
         private static Faker faker = null!;
 
 
+        public static async Task InitAsync(GitgruppenContext db)
+        {
+            if (await db.Member.AnyAsync()) return;
+
+            faker = new Faker("sv");
+
+            var members = GenerateMembers(10).ToList();
+            await db.AddRangeAsync(members);
+
+            var vehicleTypes = GenerateVehicleTypes().ToList();
+            await db.AddRangeAsync(vehicleTypes);
+
+            await AddParkingSpots(db, 20);
+
+            var vehicles = GenerateVehicles2(30, members, vehicleTypes);
+            await db.AddRangeAsync(vehicles);
+
+            await db.SaveChangesAsync();
+        }
+
+        private static IEnumerable<GitGruppen.Core.Vehicle> GenerateVehicles2(int nrOfVehicles, List<Member> members, List<VehicleType> vehicleTypes)
+        {
+            var vehicles = new List<GitGruppen.Core.Vehicle>();
+
+            Random randomGen = new Random();
+            KnownColor[] names = (KnownColor[])Enum.GetValues(typeof(KnownColor));
+
+            //Member[] mbr_ids = members.ToArray();
+            //VehicleType[] vhcl_ids = vehicleTypes.ToArray();
+
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+            for (int i = 0; i < nrOfVehicles; i++)
+            {
+                Bogus.DataSets.Vehicle bogusVehicle = faker.Vehicle;
+                var vehicle = new GitGruppen.Core.Vehicle();
+
+                KnownColor randomColorName = names[randomGen.Next(names.Length)];
+                vehicle.Color = Color.FromKnownColor(randomColorName).Name;
+
+                vehicle.Brand = bogusVehicle.Manufacturer();
+
+                vehicle.Arrived = faker.Date.Past(1, DateTime.Now);
+
+                vehicle.Member = members[randomGen.Next(0, members.Count())];
+
+                vehicle.NumberOfWheels = randomGen.Next(6) + 1;
+
+                int j = randomGen.Next(1000);
+                string license2 = "";
+                if (j < 10) license2 = "00" + j.ToString();
+                else if (j < 100) license2 = "0" + j.ToString();
+                else license2 = j.ToString();
+
+                vehicle.LicensePlate = (new string(Enumerable.Repeat(chars, 3)
+                    .Select(s => s[randomGen.Next(s.Length)]).ToArray())).ToString() + license2;
+
+                vehicle.Model = bogusVehicle.Model();
+
+                vehicle.VehicleType = vehicleTypes[randomGen.Next(vehicleTypes.Count())];
+
+                vehicles.Add(vehicle);
+            }
+
+            return vehicles;
+        }
+
+        private static IEnumerable<VehicleType> GenerateVehicleTypes()
+        {
+            var list = new List<VehicleType>
+            {
+                new VehicleType  { NrOfSpaces = 1, Type = "Car"},
+                new VehicleType  { NrOfSpaces = 1, Type = "Boat"},
+                new VehicleType  { NrOfSpaces = 1, Type = "Motorcycle"},
+                new VehicleType  { NrOfSpaces = 1, Type = "Car"}
+            };
+
+            return list;
+
+        }
+
         public static async Task AddMembers(GitgruppenContext db, int nrOfMembers)
         {
             if(faker == null) faker = new Faker("sv");
@@ -68,23 +149,7 @@ namespace Gitgruppen.Controllers.SeedData
             return students;
         }
 
-        public static async Task InitAsync(GitgruppenContext db)
-        {
-            if (await db.Member.AnyAsync()) return;
 
-            faker = new Faker("sv");
-
-            var members = GenerateMembers(50);
-            await db.AddRangeAsync(members);
-
-            //var courses = GenerateCourses(20);
-            //await db.AddRangeAsync(courses);
-
-            //var enrollments = GenerateEnrollments(courses, students);
-            //await db.AddRangeAsync(enrollments);
-
-            await db.SaveChangesAsync();
-        }
 
         internal static async Task AddParkingSpots(GitgruppenContext db, int nrOfParkingSpots)
         {
@@ -92,7 +157,7 @@ namespace Gitgruppen.Controllers.SeedData
 
             var parkingsSpots = GenerateParkingSpots(nrOfParkingSpots);
             await db.AddRangeAsync(parkingsSpots);
-            await db.SaveChangesAsync();
+            //await db.SaveChangesAsync();
         }
 
         private static IEnumerable<ParkingSpot> GenerateParkingSpots(int nrOfParkingSpots)

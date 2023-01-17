@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GitGruppen.Data.Migrations
 {
     [DbContext(typeof(GitgruppenContext))]
-    [Migration("20230116164427_rerunning")]
-    partial class rerunning
+    [Migration("20230117133655_3")]
+    partial class _3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -119,7 +119,7 @@ namespace GitGruppen.Data.Migrations
                     b.Property<int>("NumberOfWheels")
                         .HasColumnType("int");
 
-                    b.Property<int>("ParkingSpotId")
+                    b.Property<int?>("ParkingSpotId")
                         .HasColumnType("int");
 
                     b.Property<int>("VehicleTypeId")
@@ -130,7 +130,8 @@ namespace GitGruppen.Data.Migrations
                     b.HasIndex("MemberPersNr");
 
                     b.HasIndex("ParkingSpotId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ParkingSpotId] IS NOT NULL");
 
                     b.HasIndex("VehicleTypeId");
 
@@ -159,7 +160,7 @@ namespace GitGruppen.Data.Migrations
             modelBuilder.Entity("GitGruppen.Core.Receipt", b =>
                 {
                     b.HasOne("GitGruppen.Core.Member", "Member")
-                        .WithMany("Receipts")
+                        .WithMany()
                         .HasForeignKey("MemberPersNr")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -181,25 +182,25 @@ namespace GitGruppen.Data.Migrations
                         .WithMany("Vehicles")
                         .HasForeignKey("MemberPersNr");
 
-                    b.HasOne("GitGruppen.Core.ParkingSpot", null)
+                    b.HasOne("GitGruppen.Core.ParkingSpot", "ParkingSpot")
                         .WithOne("Vehicle")
-                        .HasForeignKey("GitGruppen.Core.Vehicle", "ParkingSpotId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GitGruppen.Core.Vehicle", "ParkingSpotId");
 
-                    b.HasOne("GitGruppen.Core.VehicleType", null)
+                    b.HasOne("GitGruppen.Core.VehicleType", "VehicleType")
                         .WithMany("Vehicles")
                         .HasForeignKey("VehicleTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Member");
+
+                    b.Navigation("ParkingSpot");
+
+                    b.Navigation("VehicleType");
                 });
 
             modelBuilder.Entity("GitGruppen.Core.Member", b =>
                 {
-                    b.Navigation("Receipts");
-
                     b.Navigation("Vehicles");
                 });
 
