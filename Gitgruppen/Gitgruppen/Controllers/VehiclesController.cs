@@ -11,6 +11,10 @@ using Gitgruppen.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using AutoMapper.Execution;
+
+using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace Gitgruppen.Controllers
 {
@@ -68,18 +72,19 @@ namespace Gitgruppen.Controllers
         {
             //if (ModelState.IsValid)
             //{
-                _context.Add(new GitGruppen.Core.Vehicle
-                {
-        LicensePlate = vehicleView.LicensePlate,
-        Arrived = vehicleView.Arrived,
-        Color = vehicleView.Color,
-        Brand = vehicleView.Brand,
-        Model = vehicleView.Model,
-        NumberOfWheels = vehicleView.NumberOfWheels,
-        VehicleType = _context.VehicleType.Where(e => e.Id == vehicleView.TypeId).FirstOrDefault(),
-        VehicleTypeId = vehicleView.TypeId,
-        Member = vehicleView.Member,
-    });
+
+            Vehicle vehicle = new Vehicle();
+            vehicle.Color = vehicleView.Color;
+            vehicle.Brand = vehicleView.Brand;
+            vehicle.Arrived = vehicleView.Arrived;
+            vehicle.Member = vehicleView.Member;
+            vehicle.NumberOfWheels = vehicleView.NumberOfWheels;                
+            vehicle.LicensePlate = vehicleView.LicensePlate;
+            vehicle.Model = vehicleView.Model;
+            vehicle.LicensePlate = vehicleView.LicensePlate;
+               
+            _context.Add(vehicle);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
            // }
