@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Gitgruppen.Data;
 using Gitgruppen.Controllers.SeedData;
+using Gitgruppen.Automapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<GitgruppenContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("GitgruppenContext") ?? throw new InvalidOperationException("Connection string 'GitgruppenContext' not found.")));
+
+builder.Services.AddAutoMapper(typeof(MapperProfile));
 
 var app = builder.Build();
 

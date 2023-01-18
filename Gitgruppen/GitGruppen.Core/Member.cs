@@ -17,7 +17,7 @@ namespace GitGruppen.Core
         
        /* public Membership Membership { get; set; }*/
 
-        public ICollection<Vehicle> Vehicles { get; set; }
+        public ICollection<Vehicle>? Vehicles { get; set; }
 
       /*  public ICollection<Receipt> Receipts { get; set; }*/
 

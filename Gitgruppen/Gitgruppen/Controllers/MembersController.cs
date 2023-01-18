@@ -10,30 +10,40 @@ using Gitgruppen.Data;
 using Gitgruppen.Models;
 using Bogus.DataSets;
 using System.ComponentModel.DataAnnotations;
+using AutoMapper;
 
 namespace Gitgruppen.Controllers
 {
     public class MembersController : Controller
     {
         private readonly GitgruppenContext _context;
+        private readonly IMapper mapper;
 
-        public MembersController(GitgruppenContext context)
+        public MembersController(GitgruppenContext context, IMapper mapper)
         {
             _context = context;
+            this.mapper = mapper;
         }
 
         // GET: Members
         public async Task<IActionResult> Index()
         {
-              return _context.Member != null ? 
-                          View(await _context.Member.Select(e => new MemberView
-                          {
-                              PersNr = e.PersNr,
-                              FirstName= e.FirstName,
-                              LastName= e.LastName,
-                              MemberHasNrVehicles = e.Vehicles.Count
-                          }).ToListAsync()) :
-                          Problem("Entity set 'GitgruppenContext.Member'  is null.");
+            /*             return _context.Member != null ? 
+                                     View(await _context.Member.Select(e => new MemberView
+                                     {
+                                         PersNr = e.PersNr,
+                                         FirstName= e.FirstName,
+                                         LastName= e.LastName,
+                                         MemberHasNrVehicles = e.Vehicles.Count
+                                     }).ToListAsync()) :
+                                     Problem("Entity set 'GitgruppenContext.Member'  is null.");*/
+
+            var autoMapperViewModel = await mapper.ProjectTo<MemberView>(_context.Member)
+                .OrderByDescending(m => m.FirstName)
+                .ToListAsync(); 
+                    
+
+            return View(autoMapperViewModel);
         }
 
         // GET: Members/Details/5
@@ -94,7 +104,7 @@ namespace Gitgruppen.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(member);
+             return View(member);
         }
 
         // GET: Members/Edit/5
