@@ -58,13 +58,13 @@ namespace Gitgruppen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("LicensePlate,Arrived,Color,Brand,Model,NumberOfWheels")] Vehicle vehicle)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _context.Add(vehicle);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(vehicle);
+           // }
+            //  return View(vehicle);
         }
 
         // GET: Vehicles/Edit/5
