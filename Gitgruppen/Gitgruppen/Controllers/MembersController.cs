@@ -11,6 +11,7 @@ using Gitgruppen.Models;
 using Bogus.DataSets;
 using System.ComponentModel.DataAnnotations;
 using AutoMapper;
+using System.Globalization;
 
 namespace Gitgruppen.Controllers
 {
@@ -91,12 +92,13 @@ namespace Gitgruppen.Controllers
         {
             //if (ModelState.IsValid)
             //{
-                //DateTime d = DateTime.Parse(member.PersNr);
-                //int age = DateTime.Now.Year - d.Year;
+            //var cultureInfo = new CultureInfo("se-SE");
+            //DateTime d = DateTime.Parse(member.PersNr, cultureInfo);
+            //int age = DateTime.Now.Year - d.Year;
 
-                //if(age >= 18) {
-                    
-                   _context.Add(new Member
+            //if(age >= 18) {
+
+            _context.Add(new Member
                    {
                        PersNr = member.PersNr,
                        FirstName= member.FirstName,
