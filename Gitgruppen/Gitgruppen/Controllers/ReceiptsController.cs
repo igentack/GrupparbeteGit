@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GitGruppen.Core;
 using Gitgruppen.Data;
+using Gitgruppen.Models;
 
 namespace Gitgruppen.Controllers
 {
@@ -17,6 +18,17 @@ namespace Gitgruppen.Controllers
         public ReceiptsController(GitgruppenContext context)
         {
             _context = context;
+        }
+
+        public async Task<IActionResult> Checkout(string id)
+        {
+
+            return View(new CheckoutView
+            {
+                Vehicle = _context.Vehicle.Where(e => e.LicensePlate == id).FirstOrDefault(),
+                Member = _context.Vehicle.Where(e => e.LicensePlate == id).FirstOrDefault().Member
+            });
+
         }
 
         // GET: Receipts
