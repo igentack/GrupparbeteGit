@@ -68,7 +68,7 @@ namespace Gitgruppen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(VehicleView vehicleView)
+        public async Task<IActionResult> Create(VehicleView vehicleView, VehicleType thestringGodforgot)
         {
             //if (ModelState.IsValid)
             //{
@@ -76,9 +76,9 @@ namespace Gitgruppen.Controllers
             vehicle.Color = vehicleView.Color;
             vehicle.Brand = vehicleView.Brand;
             vehicle.Arrived = vehicleView.Arrived;
-            vehicle.Member = _context.Member.FirstOrDefault(m => m.PersNr == vehicleView.Member.PersNr);
+            //vehicle.Member = _context.Member.FirstOrDefault(m => m.PersNr == vehicleView.Member.PersNr);
             /* vehicle.VehicleType= vehicleView.VehicleType,*/
-            vehicle.VehicleType = _context.VehicleType.FirstOrDefault(v => v.Type == vehicleView.VehicleTypeName);
+            vehicle.VehicleType = thestringGodforgot;
             
             vehicle.NumberOfWheels = vehicleView.NumberOfWheels;                
             vehicle.LicensePlate = vehicleView.LicensePlate;

@@ -1,6 +1,7 @@
 ﻿@using GitGruppen.Core;
 @model VehicleView
-@*@inject ISelectVehicleTypesService service*@
+@using Gitgruppen.Services;
+@inject IVehicleTypeSelectListService service;
 
 @{
     ViewData["Title"] = "Create";
@@ -30,7 +31,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="VehicleType" class="control-label"></label>
-                <select asp-for="TypeId" class="form-control">
+                <select class="form-select" name="thestringGodforgot" asp-items="@await service.GetVehicleTypesAsync()">
+                    <option selected>Choose Type</option>
+                
+                </select> &nbsp;&nbsp;
+                
+                
+                
+                @*   <select asp-for="TypeId" class="form-control">
 
                @foreach(VehicleType t in Model.VehicleTypes)
                 {
