@@ -20,6 +20,8 @@ namespace Gitgruppen.Data
         public DbSet<ParkingSpot> ParkingSpot { get; set; } = default!;
         public DbSet<Receipt> Receipt { get; set; } = default!;
 
+       
+
     }
 }
 

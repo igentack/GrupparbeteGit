@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GitGruppen.Data.Migrations
 {
     [DbContext(typeof(GitgruppenContext))]
-    [Migration("20230117133655_3")]
-    partial class _3
+    [Migration("20230118145901_yoda2")]
+    partial class yoda2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

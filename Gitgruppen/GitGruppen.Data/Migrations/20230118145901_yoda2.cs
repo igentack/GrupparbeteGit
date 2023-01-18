@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GitGruppen.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class yoda2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -63,7 +63,7 @@ namespace GitGruppen.Data.Migrations
                     NumberOfWheels = table.Column<int>(type: "int", nullable: false),
                     VehicleTypeId = table.Column<int>(type: "int", nullable: false),
                     MemberPersNr = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ParkingSpotId = table.Column<int>(type: "int", nullable: false)
+                    ParkingSpotId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -77,8 +77,7 @@ namespace GitGruppen.Data.Migrations
                         name: "FK_Vehicle_ParkingSpot_ParkingSpotId",
                         column: x => x.ParkingSpotId,
                         principalTable: "ParkingSpot",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Vehicle_VehicleType_VehicleTypeId",
                         column: x => x.VehicleTypeId,
@@ -135,7 +134,8 @@ namespace GitGruppen.Data.Migrations
                 name: "IX_Vehicle_ParkingSpotId",
                 table: "Vehicle",
                 column: "ParkingSpotId",
-                unique: true);
+                unique: true,
+                filter: "[ParkingSpotId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehicle_VehicleTypeId",
