@@ -1,5 +1,6 @@
 ﻿@using GitGruppen.Core;
 @model VehicleView
+@*@inject ISelectVehicleTypesService service*@
 
 @{
     ViewData["Title"] = "Create";
@@ -13,6 +14,7 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="@Model.Member.PersNr" />
             <div class="form-group">
                 <label asp-for="Member" class="control-label">@Model.Member.FullName</label>
             </div>

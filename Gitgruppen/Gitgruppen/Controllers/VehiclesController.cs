@@ -76,7 +76,7 @@ namespace Gitgruppen.Controllers
             vehicle.Color = vehicleView.Color;
             vehicle.Brand = vehicleView.Brand;
             vehicle.Arrived = vehicleView.Arrived;
-            vehicle.Member = vehicleView.Member;
+            vehicle.Member = _context.Member.FirstOrDefault(m => m.PersNr == vehicleView.Member.PersNr);
             /* vehicle.VehicleType= vehicleView.VehicleType,*/
             vehicle.VehicleType = _context.VehicleType.FirstOrDefault(v => v.Type == vehicleView.VehicleTypeName);
             

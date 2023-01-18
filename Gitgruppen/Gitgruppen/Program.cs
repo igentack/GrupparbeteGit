@@ -12,6 +12,7 @@ builder.Services.AddDbContext<GitgruppenContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("GitgruppenContext") ?? throw new InvalidOperationException("Connection string 'GitgruppenContext' not found.")));
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));
+//builder.Services.AddScoped(Idsafdsaf, dsafdsaf);
 
 var app = builder.Build();
 
