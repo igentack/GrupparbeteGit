@@ -1,4 +1,4 @@
-﻿@model GitGruppen.Core.Vehicle
+﻿@model VehicleView
 
 @{
     ViewData["Title"] = "Create";
@@ -21,6 +21,11 @@
                 <label asp-for="Arrived" class="control-label"></label>
                 <input asp-for="Arrived" class="form-control" />
                 <span asp-validation-for="Arrived" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VehicleType" class="control-label"></label>
+                <select asp-for="VehicleType" class="form-control" />
+                <span asp-validation-for="VehicleType" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Color" class="control-label"></label>
@@ -46,11 +51,6 @@
                 <label asp-for="Member" class="control-label"></label>
                 <select asp-for="Member" class="form-control" />
                 <span asp-validation-for="Member" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="VehicleType" class="control-label"></label>
-                <select asp-for="VehicleType" class="form-control" />
-                <span asp-validation-for="VehicleType" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
