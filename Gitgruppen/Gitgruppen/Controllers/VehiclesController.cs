@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using GitGruppen.Core;
 using Gitgruppen.Data;
 using Gitgruppen.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace Gitgruppen.Controllers
 {
@@ -61,11 +64,22 @@ namespace Gitgruppen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LicensePlate,Arrived,Color,Brand,Model,NumberOfWheels")] Vehicle vehicle)
+        public async Task<IActionResult> Create([Bind("LicensePlate,Arrived,Color,Brand,Model,NumberOfWheels, VehicleTypeId")] VehicleView vehicleView)
         {
             //if (ModelState.IsValid)
             //{
-                _context.Add(vehicle);
+                _context.Add(new GitGruppen.Core.Vehicle
+                {
+        LicensePlate = vehicleView.LicensePlate,
+        Arrived = vehicleView.Arrived,
+        Color = vehicleView.Color,
+        Brand = vehicleView.Brand,
+        Model = vehicleView.Model,
+        NumberOfWheels = vehicleView.NumberOfWheels,
+        VehicleType = _context.VehicleType.Where(e => e.Id == vehicleView.VehicleTypeId).FirstOrDefault(),
+        VehicleTypeId = vehicleView.VehicleTypeId,
+        Member = vehicleView.Member,
+    });
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
            // }
@@ -93,7 +107,7 @@ namespace Gitgruppen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("LicensePlate,Arrived,Color,Brand,Model,NumberOfWheels")] Vehicle vehicle)
+        public async Task<IActionResult> Edit(string id, [Bind("LicensePlate,Arrived,Color,Brand,Model,NumberOfWheels")] GitGruppen.Core.Vehicle vehicle)
         {
             if (id != vehicle.LicensePlate)
             {
