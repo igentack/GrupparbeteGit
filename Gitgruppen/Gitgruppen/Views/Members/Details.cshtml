@@ -76,6 +76,8 @@
                     <a asp-controller="Vehicles" asp-action="Edit" asp-route-id="@item.LicensePlate">Edit</a> |
                     <a asp-controller="Vehicles" asp-action="Details" asp-route-id="@item.LicensePlate">Details</a> |
                     <a asp-controller="Vehicles" asp-action="Delete" asp-route-id="@item.LicensePlate">Delete</a>
+                    <a asp-controller="ParkingSpots" asp-action="Checkin" asp-route-id="@item.LicensePlate">Check in</a>
+                    <a asp-controller="Vehicles" asp-action="Delete" asp-route-id="@item.LicensePlate">Check out</a>
                 </td>
             </tr>
         }

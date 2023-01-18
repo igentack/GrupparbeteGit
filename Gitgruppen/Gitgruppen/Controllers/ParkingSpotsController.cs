@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GitGruppen.Core;
 using Gitgruppen.Data;
+using Gitgruppen.Models;
 
 namespace Gitgruppen.Controllers
 {
@@ -26,6 +27,17 @@ namespace Gitgruppen.Controllers
                           View(await _context.ParkingSpot.ToListAsync()) :
                           Problem("Entity set 'GitgruppenContext.ParkingSpot'  is null.");
         }
+
+
+        public async Task<IActionResult> Checkin(string id)
+        {
+            return View(new CheckinView
+            {
+                licenseplate = id,
+                FreeParkingSpots = _context.ParkingSpot.ToList(),
+            });
+        }
+
 
         // GET: ParkingSpots/Details/5
         public async Task<IActionResult> Details(int? id)
