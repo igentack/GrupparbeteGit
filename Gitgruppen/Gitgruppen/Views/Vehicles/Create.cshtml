@@ -1,7 +1,15 @@
-﻿@model VehicleView
+﻿@using GitGruppen.Core;
+@model VehicleView
 
 @{
     ViewData["Title"] = "Create";
+    string types = "";
+    foreach(VehicleType t in Model.VehicleTypes)
+    {
+        types += $"<option value=\"{t.Id}\">{t.Type}</option>";
+    }
+
+
 }
 
 <h1>Create</h1>
@@ -12,6 +20,9 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Member" class="control-label">@Model.Member.FullName</label>
+            </div>
             <div class="form-group">
                 <label asp-for="LicensePlate" class="control-label"></label>
                 <input asp-for="LicensePlate" class="form-control" />
@@ -24,7 +35,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="VehicleType" class="control-label"></label>
-                <select asp-for="VehicleType" class="form-control" />
+                <select asp-for="VehicleType" class="form-control">
+                    @types
+                </select>
+                @*asp-items="@(new SelectList(Model.VehicleTypes, "Id", "Type"))"*@
+                @*asp-for="VehicleView.CountryId"*@
                 <span asp-validation-for="VehicleType" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -46,11 +61,6 @@
                 <label asp-for="NumberOfWheels" class="control-label"></label>
                 <input asp-for="NumberOfWheels" class="form-control" />
                 <span asp-validation-for="NumberOfWheels" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Member" class="control-label"></label>
-                <select asp-for="Member" class="form-control" />
-                <span asp-validation-for="Member" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GitGruppen.Core;
 using Gitgruppen.Data;
+using Gitgruppen.Models;
 
 namespace Gitgruppen.Controllers
 {
@@ -46,9 +47,13 @@ namespace Gitgruppen.Controllers
         }
 
         // GET: Vehicles/Create
-        public IActionResult Create()
+        public IActionResult Create(string id)
         {
-            return View();
+            return View(new VehicleView
+            {
+                Member = _context.Member.Where(e => e.PersNr.Equals(id)).First(),
+                VehicleTypes = _context.VehicleType.ToList()
+            }) ;
         }
 
         // POST: Vehicles/Create
