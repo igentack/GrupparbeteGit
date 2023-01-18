@@ -17,7 +17,7 @@ namespace Gitgruppen.Models
         public string Model { get; set; }
 
         public int NumberOfWheels { get; set; }
-        public int VehicleTypeId { get; set; }
+        public int TypeId { get; set; }
         public string VehicleTypeName { get; set; }
         public VehicleType VehicleType { get; set; }
         public Member Member { get; set; }

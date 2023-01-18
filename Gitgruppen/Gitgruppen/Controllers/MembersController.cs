@@ -66,7 +66,7 @@ namespace Gitgruppen.Controllers
                       Brand = e.Brand,
                       Model = e.Model,
                       NumberOfWheels = e.NumberOfWheels,
-                      VehicleTypeId = e.VehicleTypeId,
+                      TypeId = e.VehicleTypeId,
                       VehicleTypeName = e.VehicleType.Type,
                       VehicleType = e.VehicleType,
                       Member = e.Member,

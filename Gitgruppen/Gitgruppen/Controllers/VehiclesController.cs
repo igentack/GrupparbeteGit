@@ -76,8 +76,8 @@ namespace Gitgruppen.Controllers
         Brand = vehicleView.Brand,
         Model = vehicleView.Model,
         NumberOfWheels = vehicleView.NumberOfWheels,
-        VehicleType = _context.VehicleType.Where(e => e.Id == vehicleView.VehicleTypeId).FirstOrDefault(),
-        VehicleTypeId = vehicleView.VehicleTypeId,
+        VehicleType = _context.VehicleType.Where(e => e.Id == vehicleView.TypeId).FirstOrDefault(),
+        VehicleTypeId = vehicleView.TypeId,
         Member = vehicleView.Member,
     });
                 await _context.SaveChangesAsync();
