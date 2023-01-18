@@ -28,18 +28,9 @@ namespace Gitgruppen.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
-            /*             return _context.Member != null ? 
-                                     View(await _context.Member.Select(e => new MemberView
-                                     {
-                                         PersNr = e.PersNr,
-                                         FirstName= e.FirstName,
-                                         LastName= e.LastName,
-                                         MemberHasNrVehicles = e.Vehicles.Count
-                                     }).ToListAsync()) :
-                                     Problem("Entity set 'GitgruppenContext.Member'  is null.");*/
-
+  
             var autoMapperViewModel = await mapper.ProjectTo<MemberView>(_context.Member)
-                .OrderByDescending(m => m.FirstName)
+                .OrderBy(m => m.FirstName)
                 .ToListAsync(); 
                     
 
@@ -79,7 +70,7 @@ namespace Gitgruppen.Controllers
                       VehicleType = e.VehicleType,
                       Member = e.Member,
                       ParkingSpotId = e.ParkingSpotId
-    }).ToList()
+            }).ToList()
             };
 
             return View(mdv);
