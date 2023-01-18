@@ -87,15 +87,26 @@ namespace Gitgruppen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PersNr,FirstName,LastName")] Member member)
+        public async Task<IActionResult> Create([Bind("PersNr,FirstName,LastName")] MemberView member)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(member);
-                await _context.SaveChangesAsync();
+            //if (ModelState.IsValid)
+            //{
+                //DateTime d = DateTime.Parse(member.PersNr);
+                //int age = DateTime.Now.Year - d.Year;
+
+                //if(age >= 18) {
+                    
+                   _context.Add(new Member
+                   {
+                       PersNr = member.PersNr,
+                       FirstName= member.FirstName,
+                       LastName= member.LastName
+                   });
+                   await _context.SaveChangesAsync();
+                //}
                 return RedirectToAction(nameof(Index));
-            }
-             return View(member);
+            //}
+             //return View(member);
         }
 
         // GET: Members/Edit/5
