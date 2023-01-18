@@ -38,6 +38,15 @@ namespace Gitgruppen.Controllers
             });
         }
 
+        public async Task<IActionResult> Checkin([Bind("Id,licenseplate")] CheckinView checkinView)
+        {
+
+
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
 
         // GET: ParkingSpots/Details/5
         public async Task<IActionResult> Details(int? id)
