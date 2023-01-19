@@ -28,13 +28,53 @@ namespace Gitgruppen.Controllers
             var autoMapperViewModel = await mapper.ProjectTo<OverViewModel>(_context.Vehicle)
                 .OrderBy(m => m.LicensePlate)
                 .ToListAsync();
-
+           /* ViewData["ArrSort"] = "arrived";*/
             return View(autoMapperViewModel);
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+        public async Task<IActionResult> search(string sort, string licensePlate)
+        {
+            ViewData["TypeSort"] = String.IsNullOrEmpty(sort) ? "typeDesc" : "";
+            ViewData["LicenseSort"] = sort == "arrived" ? "arrDesc" : "arrived";
+            ViewData["LicensePlate"] = licensePlate;
+
+         
+            var vehicles = from v in _context.Vehicle select v;
+
+            if (!String.IsNullOrEmpty(licensePlate))
+            {
+                vehicles = vehicles.Where(v => v.LicensePlate.Contains(licensePlate));
+            }
+
+            switch (sort)
+            {
+                case "typeDesc":
+                    vehicles = vehicles.OrderByDescending(v => v.MemberPersNr);
+                    break;
+
+                case "arrived":
+                    vehicles = vehicles.OrderBy(v => v.LicensePlate);
+                    break;
+
+                case "arrDesc":
+                    vehicles = vehicles.OrderByDescending(v => v.LicensePlate);
+                    break;
+
+                default:
+                    vehicles = vehicles.OrderBy(v => v.MemberPersNr);
+                    break;
+            }
+
+            var autoMapperViewModel = await mapper.ProjectTo<OverViewModel>(vehicles.AsNoTracking())
+                
+                 .ToListAsync();
+
+            return View("Search", autoMapperViewModel);
+
         }
     }
 }
