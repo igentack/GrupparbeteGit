@@ -26,12 +26,12 @@ namespace Gitgruppen.Controllers
         {
 
             Vehicle vehicle = _context.Vehicle.Where(e => e.LicensePlate == id).First();
-            Member member = vehicle.Member;
+            //Member member = _context.Vehicle.Where(e => e.LicensePlate == id).;
             
 
             CheckoutView cov = new CheckoutView();
             cov.LicensePlate = vehicle.LicensePlate;
-            cov.MemberPersNr = member.PersNr;
+            cov.MemberPersNr = vehicle.MemberPersNr;
             cov.Arrived = vehicle.Arrived;    
 
             return View(cov);
@@ -49,7 +49,8 @@ namespace Gitgruppen.Controllers
             receipt.TimeDeparture = DateTime.Now;
             _context.Add(receipt);
             await _context.SaveChangesAsync();
-            return RedirectToAction($"Receipt/Details/{receipt.Id}");
+            //return RedirectToAction($"Receipt/Details/{receipt.Id}");
+            return RedirectToAction("Index");
         }
 
         // GET: Receipts
