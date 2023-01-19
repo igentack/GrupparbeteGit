@@ -45,6 +45,12 @@ namespace Gitgruppen.Controllers
         {
             Vehicle vehicle = _context.Vehicle.Where(e => e.LicensePlate == checkoutView.LicensePlate).First();
 
+
+            vehicle.ParkingSpotId = null;
+            _context.Update(vehicle);
+            await _context.SaveChangesAsync();
+
+
             Receipt receipt = new Receipt();
             receipt.TotalCost = 0;
             receipt.VehicleLicensePlate = vehicle.LicensePlate;

@@ -50,10 +50,11 @@ namespace Gitgruppen.Controllers
         {
             var vehicle = await _context.Vehicle.FindAsync(checkinView.licenseplate);
             vehicle.ParkingSpotId = checkinView.Id;
+            _context.Update(vehicle);
             await _context.SaveChangesAsync();
 
             var routeValues = new RouteValueDictionary {
-                  { "id", checkinView.MemberPersNr }
+                  { "id", vehicle.MemberPersNr }
             };
 
             return RedirectToAction("Details", "Members", routeValues);
