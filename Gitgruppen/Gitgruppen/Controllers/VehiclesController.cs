@@ -54,13 +54,16 @@ namespace Gitgruppen.Controllers
         }
 
         // GET: Vehicles/Create
-        public IActionResult Create(string id)
+        public IActionResult Create(string memberId)
         {
+            GitGruppen.Core.Member member = _context.Member.Where(e => e.PersNr.Equals(memberId)).First();
+
             return View(new VehicleView
             {
-                Member = _context.Member.Where(e => e.PersNr.Equals(id)).First(),
+                MemberId= member.PersNr,
+                FullName = member.FullName,
                 VehicleTypes = _context.VehicleType.ToList()
-            }) ;
+            });
         }
 
         // POST: Vehicles/Create
@@ -84,11 +87,18 @@ namespace Gitgruppen.Controllers
             vehicle.LicensePlate = vehicleView.LicensePlate;
             vehicle.Model = vehicleView.Model;
             vehicle.LicensePlate = vehicleView.LicensePlate;
+            vehicle.MemberPersNr = vehicleView.MemberId;
                
             _context.Add(vehicle);
 
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+
+            var routeValues = new RouteValueDictionary {
+                  { "id", vehicle.MemberPersNr }
+            };
+
+            return RedirectToAction("Details", "Members", routeValues);
            // }
             //  return View(vehicle);
         }
