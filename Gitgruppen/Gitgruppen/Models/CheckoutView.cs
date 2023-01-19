@@ -6,5 +6,6 @@ namespace Gitgruppen.Models
     {
     public    Vehicle Vehicle { get; set; }
     public    Member Member { get; set; }
+        public string persnr { get; internal set; }
     }
 }
