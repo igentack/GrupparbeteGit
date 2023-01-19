@@ -21,7 +21,7 @@ namespace Gitgruppen.Models
         {
             if (FirstName.Equals(LastName))
             {
-                yield return new ValidationResult("First and last name cannot be the same", new[] { "ConfirmEmail" });
+                yield return new ValidationResult("First and last name cannot be the same");
             }
         }
     }
