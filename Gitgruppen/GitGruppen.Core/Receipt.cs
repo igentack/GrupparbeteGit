@@ -19,9 +19,9 @@ namespace GitGruppen.Core
         [Required]
         public Vehicle Vehicle { get; set; }
 
-        public string PersNr { get; set; }
+        public string MemberPersNr { get; set; }
 
-        public string LicensePlate { get; set; }
+        public string VehicleLicensePlate { get; set; }
 
     }
 }
