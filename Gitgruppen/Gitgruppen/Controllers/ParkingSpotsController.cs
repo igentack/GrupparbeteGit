@@ -38,7 +38,10 @@ namespace Gitgruppen.Controllers
             });
         }
 
-        public async Task<IActionResult> Checkin([Bind("Id,licenseplate")] CheckinView checkinView)
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Checkin(CheckinView checkinView)
         {
 
 

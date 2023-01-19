@@ -20,6 +20,15 @@ namespace Gitgruppen.Controllers
             _context = context;
         }
 
+
+        public IActionResult Checkout()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Checkout(string id)
         {
 
