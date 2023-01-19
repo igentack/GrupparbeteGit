@@ -10,6 +10,7 @@ namespace GitGruppen.Core
             ErrorMessage = "Not a proper Personnummer")]
         public string PersNr { get; set; }
         [Required]
+        //[NameNotTheSame("LastName", ErrorMessage = "{0} cannot be the same as {1}")]
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
@@ -56,6 +57,33 @@ namespace GitGruppen.Core
             return true;
         }
     }
+    //public class NameNotTheSame : ValidationAttribute
+    //{
+    //    private readonly string _lastName;
+
+    //    public NameNotTheSame(string lastName)
+    //    {
+    //        _lastName = lastName;
+    //    }
+
+    //    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+    //    {
+    //        ErrorMessage = ErrorMessageString;
+    //        var currentValue = (string)value;
+
+    //        var property = validationContext.ObjectType.GetProperty(_lastName);
+
+    //        if (property == null)
+    //            throw new ArgumentException("Property with this name not found");
+
+    //        var comparisonValue = (string)property.GetValue(validationContext.ObjectInstance); 
+
+    //        if (currentValue.Equals(comparisonValue))
+    //            return new ValidationResult(ErrorMessage);
+
+    //        return ValidationResult.Success;
+    //    }
+    //}
   /*  public enum Membership
     {
         Member,
