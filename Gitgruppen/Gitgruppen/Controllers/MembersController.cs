@@ -192,6 +192,12 @@ namespace Gitgruppen.Controllers
             var member = await _context.Member.FindAsync(id);
             if (member != null)
             {
+                GitGruppen.Core.Vehicle[] vehicles = _context.Vehicle.Where(e => e.MemberPersNr == member.PersNr).ToArray();
+                _context.Vehicle.RemoveRange(vehicles);
+
+                Receipt[] receipts = _context.Receipt.Where(e => !e.MemberPersNr.Equals(member.PersNr)).ToArray();
+                _context.Receipt.RemoveRange(receipts);
+
                 _context.Member.Remove(member);
             }
             

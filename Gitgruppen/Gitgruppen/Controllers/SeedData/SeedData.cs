@@ -94,7 +94,7 @@ namespace Gitgruppen.Controllers.SeedData
                 new VehicleType  { NrOfSpaces = 1, Type = "Car"},
                 new VehicleType  { NrOfSpaces = 1, Type = "Boat"},
                 new VehicleType  { NrOfSpaces = 1, Type = "Motorcycle"},
-                new VehicleType  { NrOfSpaces = 1, Type = "Car"}
+                new VehicleType  { NrOfSpaces = 1, Type = "Scooter"}
             };
 
             return list;

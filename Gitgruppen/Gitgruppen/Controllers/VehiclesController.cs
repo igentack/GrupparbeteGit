@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using AutoMapper.Execution;
-
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -124,18 +123,28 @@ namespace Gitgruppen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("LicensePlate,Arrived,Color,Brand,Model,NumberOfWheels")] GitGruppen.Core.Vehicle vehicle)
+        public async Task<IActionResult> Edit(string id, Vehicle vehicle)
         {
             if (id != vehicle.LicensePlate)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
-                    _context.Update(vehicle);
+
+                Vehicle vehicleu = await _context.Vehicle.FindAsync(vehicle.LicensePlate);
+                vehicleu.Arrived = vehicle.Arrived;
+                vehicleu.Brand = vehicle.Brand;
+                vehicleu.Color = vehicle.Color;
+                //vehicleu.LicensePlate = vehicle.LicensePlate;
+                vehicleu.Model = vehicle.Model;
+                vehicleu.NumberOfWheels = vehicle.NumberOfWheels;
+                //vehicleu.VehicleTypeId = vehicle.VehicleTypeId;
+
+                    _context.Update(vehicleu);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -150,8 +159,8 @@ namespace Gitgruppen.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            return View(vehicle);
+            //}
+            //return View(vehicle);
         }
 
         // GET: Vehicles/Delete/5
