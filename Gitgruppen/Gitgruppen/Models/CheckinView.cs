@@ -8,5 +8,6 @@ namespace Gitgruppen.Models
         public int Id { get; set; }
 
         public List<ParkingSpot> FreeParkingSpots { get; set; }
+        public string MemberPersNr { get; internal set; }
     }
 }

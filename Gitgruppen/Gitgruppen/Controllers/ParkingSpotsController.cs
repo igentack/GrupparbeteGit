@@ -31,8 +31,13 @@ namespace Gitgruppen.Controllers
 
         public async Task<IActionResult> Checkin(string id)
         {
+            Vehicle vehicle = _context.Vehicle.Where(e => e.LicensePlate == id).First();
+            Member member = _context.Member.Where(e => e.PersNr == vehicle.MemberPersNr).First();
+
+
             return View(new CheckinView
             {
+                MemberPersNr = member.PersNr,
                 licenseplate = id,
                 FreeParkingSpots = _context.ParkingSpot.ToList(),
             });
@@ -43,10 +48,15 @@ namespace Gitgruppen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Checkin(CheckinView checkinView)
         {
+            var vehicle = await _context.Vehicle.FindAsync(checkinView.licenseplate);
+            vehicle.ParkingSpotId = checkinView.Id;
+            await _context.SaveChangesAsync();
 
+            var routeValues = new RouteValueDictionary {
+                  { "id", checkinView.MemberPersNr }
+            };
 
-
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Details", "Members", routeValues);
         }
 
 
