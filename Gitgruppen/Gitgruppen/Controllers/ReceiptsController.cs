@@ -45,11 +45,9 @@ namespace Gitgruppen.Controllers
         {
             Vehicle vehicle = _context.Vehicle.Where(e => e.LicensePlate == checkoutView.LicensePlate).First();
 
-
             vehicle.ParkingSpotId = null;
             _context.Update(vehicle);
             await _context.SaveChangesAsync();
-
 
             Receipt receipt = new Receipt();
             receipt.TotalCost = 0;
@@ -70,7 +68,13 @@ namespace Gitgruppen.Controllers
             _context.Add(receipt);
             await _context.SaveChangesAsync();
             //return RedirectToAction($"Receipt/Details/{receipt.Id}");
-            return RedirectToAction("Index");
+
+            var routeValues = new RouteValueDictionary {
+                  { "id", receipt.Id }
+            };
+
+            return RedirectToAction("Details", "Receipts", routeValues);
+
         }
 
         // GET: Receipts
