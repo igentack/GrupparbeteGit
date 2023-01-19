@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Gitgruppen.Models.OverViewModel>
+
+@{
+    ViewData["Title"] = "OverView";
+}
+
+<h1>OverView</h1>
+
+<form asp-action="Search" method="get">
+    <div class="form-actions no-color">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder=" Search Licenseplate" name="licensePlate" value="@ViewData["LicensePlate"]" />
+            <input type="submit" value="Search" class="btn btn-info" /> &nbsp;
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <thead class="bg-dark bg-opacity-75 text-light text-uppercase text-center">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Member)
+            </th>
+            <th>
+                <a class="sortbuttons" asp-action="Search" asp-route-sort="@ViewData["TypeSort"]">@Html.DisplayNameFor(model => model.Type)</a>
+            </th>
+            <th>
+                <a class="sortbuttons" asp-action="Search" asp-route-sort="@ViewData["LicenseSort"]">@Html.DisplayNameFor(model => model.LicensePlate)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arrived)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkedTime)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Members" asp-action="Details" asp-route-id="@item.Member.PersNr">@Html.DisplayFor(modelItem => item.Member.FullName)</a>
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicensePlate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Arrived)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParkedTime)
+                </td>
+                @*    <td>
+            <a class="btn btn-outline-dark text-decoration-none" asp-action="Edit" asp-route-id="@item.LicensePlate">Modify</a> |
+            <a class="btn btn-outline-dark text-decoration-none" asp-action="Details" asp-route-id="@item.LicensePlate">Details</a> |
+            <a class="btn btn-outline-danger text-decoration-none" asp-action="Delete" asp-route-id="@item.LicensePlate">Check out vehicle</a>
+            </td>*@
+            </tr>
+        }
+    </tbody>
+</table>
+
