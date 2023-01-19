@@ -10,6 +10,7 @@ namespace GitGruppen.Core
         public int SpotNo { get; set; }
 
         public Vehicle? Vehicle { get; set; }
+         
     }
 }
     
