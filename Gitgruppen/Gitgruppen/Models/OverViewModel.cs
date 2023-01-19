@@ -16,10 +16,11 @@ namespace Gitgruppen.Models
         
         public string? Brand { get; set; }
         
+        public string VehicleTypeType { get; set; }
         public DateTime Arrived { get; set; }
         
         [DisplayFormat(DataFormatString = "{0:hh\\:mm\\:ss}")]
-        public TimeSpan ParkedTime { get; set; }
+        public DateTime ParkedTime { get; set; }
         public string Color { get; set; }
         public int NumberOfWheels { get; set; }
         public string Model { get; set; }

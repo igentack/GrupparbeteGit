@@ -41,23 +41,8 @@
             <div class="form-group">
                 <label asp-for="VehicleType" class="control-label"></label>
                 <select class="form-select" name="thestringGodforgot" asp-items="@await service.GetVehicleTypesAsync()">
-                    <option selected>Choose Type</option>
-                
-                </select> &nbsp;&nbsp;
-                
-                
-                
-                @*   <select asp-for="TypeId" class="form-control">
-
-               @foreach(VehicleType t in Model.VehicleTypes)
-                {
-                        <option value="@t.Id">@t.Type</option>;
-                }   
-
-
-                 </select>
-                @*asp-items="@(new SelectList(Model.VehicleTypes, "Id", "Type"))"*@
-                @*asp-for="VehicleView.CountryId"*@
+                    <option selected>Choose Type</option>               
+                </select> 
                 <span asp-validation-for="VehicleType" class="text-danger"></span>
             </div>
             <div class="form-group">

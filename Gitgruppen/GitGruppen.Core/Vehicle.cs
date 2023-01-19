@@ -20,6 +20,7 @@ namespace GitGruppen.Core
 
         public int NumberOfWheels { get; set; }
         public int VehicleTypeId { get; set; }
+    
         public VehicleType VehicleType { get; set; }
 
         public string MemberPersNr { get; set; }

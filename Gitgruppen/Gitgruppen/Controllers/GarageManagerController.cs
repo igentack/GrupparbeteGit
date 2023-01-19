@@ -36,7 +36,7 @@ namespace Gitgruppen.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> search(string sort, string licensePlate)
+        public async Task<IActionResult> Search(string sort, string licensePlate)
         {
             ViewData["TypeSort"] = String.IsNullOrEmpty(sort) ? "typeDesc" : "";
             ViewData["LicenseSort"] = sort == "arrived" ? "arrDesc" : "arrived";

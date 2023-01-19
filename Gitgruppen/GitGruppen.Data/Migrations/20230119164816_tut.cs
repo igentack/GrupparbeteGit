@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GitGruppen.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class lolo : Migration
+    public partial class tut : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,6 +38,23 @@ namespace GitGruppen.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Receipt",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TimeDeparture = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TimeArrival = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TotalCost = table.Column<double>(type: "float", nullable: false),
+                    MemberPersNr = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VehicleLicensePlate = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Receipt", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "VehicleType",
                 columns: table => new
                 {
@@ -62,7 +79,7 @@ namespace GitGruppen.Data.Migrations
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NumberOfWheels = table.Column<int>(type: "int", nullable: false),
                     VehicleTypeId = table.Column<int>(type: "int", nullable: false),
-                    MemberPersNr = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    MemberPersNr = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ParkingSpotId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -72,7 +89,8 @@ namespace GitGruppen.Data.Migrations
                         name: "FK_Vehicle_Member_MemberPersNr",
                         column: x => x.MemberPersNr,
                         principalTable: "Member",
-                        principalColumn: "PersNr");
+                        principalColumn: "PersNr",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Vehicle_ParkingSpot_ParkingSpotId",
                         column: x => x.ParkingSpotId,
@@ -85,45 +103,6 @@ namespace GitGruppen.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "Receipt",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TimeDeparture = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TimeArrival = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TotalCost = table.Column<double>(type: "float", nullable: false),
-                    MemberPersNr = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    VehicleLicensePlate = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Receipt", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Receipt_Member_MemberPersNr",
-                        column: x => x.MemberPersNr,
-                        principalTable: "Member",
-                        principalColumn: "PersNr",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Receipt_Vehicle_VehicleLicensePlate",
-                        column: x => x.VehicleLicensePlate,
-                        principalTable: "Vehicle",
-                        principalColumn: "LicensePlate",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Receipt_MemberPersNr",
-                table: "Receipt",
-                column: "MemberPersNr");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Receipt_VehicleLicensePlate",
-                table: "Receipt",
-                column: "VehicleLicensePlate");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehicle_MemberPersNr",

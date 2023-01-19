@@ -24,15 +24,11 @@
             <th>
                 <a class="sortbuttons" asp-action="Search" name="sort" value="@ViewData["TypeSort"]">@Html.DisplayNameFor(model => model.Type)</a>
             </th>
-      @*      <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>*@
+
             <th>
                 <a class="sortbuttons" asp-action="Search" name="sort" value="@ViewData["LicenseSort"]">@Html.DisplayNameFor(model => model.LicensePlate)</a>
             </th>
-          @*  <th>
-                @Html.DisplayNameFor(model => model.LicensePlate)
-            </th>*@
+
             <th>
                 @Html.DisplayNameFor(model => model.Brand)
             </th>
@@ -53,7 +49,7 @@
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.Type)
+                @Html.DisplayFor(modelItem => item.VehicleTypeType)
             </td>
             <td>
                    @Html.DisplayFor(modelItem => item.LicensePlate)
@@ -67,11 +63,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ParkedTime)
             </td>
-    @*    <td>
-                <a class="btn btn-outline-dark text-decoration-none" asp-action="Edit" asp-route-id="@item.LicensePlate">Modify</a> 
-                <a class="btn btn-outline-dark text-decoration-none" asp-action="Details" asp-route-id="@item.LicensePlate">Details</a> 
-                <a class="btn btn-outline-danger text-decoration-none" asp-action="Delete" asp-route-id="@item.LicensePlate">Check out vehicle</a>
-            </td>*@
+
         </tr>
 }
     </tbody>

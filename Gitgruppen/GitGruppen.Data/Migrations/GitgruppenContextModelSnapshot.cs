@@ -66,7 +66,7 @@ namespace GitGruppen.Data.Migrations
 
                     b.Property<string>("MemberPersNr")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("TimeArrival")
                         .HasColumnType("datetime2");
@@ -79,13 +79,9 @@ namespace GitGruppen.Data.Migrations
 
                     b.Property<string>("VehicleLicensePlate")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MemberPersNr");
-
-                    b.HasIndex("VehicleLicensePlate");
 
                     b.ToTable("Receipt");
                 });
@@ -107,6 +103,7 @@ namespace GitGruppen.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MemberPersNr")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Model")
@@ -154,30 +151,13 @@ namespace GitGruppen.Data.Migrations
                     b.ToTable("VehicleType");
                 });
 
-            modelBuilder.Entity("GitGruppen.Core.Receipt", b =>
-                {
-                    b.HasOne("GitGruppen.Core.Member", "Member")
-                        .WithMany()
-                        .HasForeignKey("MemberPersNr")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GitGruppen.Core.Vehicle", "Vehicle")
-                        .WithMany()
-                        .HasForeignKey("VehicleLicensePlate")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Member");
-
-                    b.Navigation("Vehicle");
-                });
-
             modelBuilder.Entity("GitGruppen.Core.Vehicle", b =>
                 {
                     b.HasOne("GitGruppen.Core.Member", "Member")
                         .WithMany("Vehicles")
-                        .HasForeignKey("MemberPersNr");
+                        .HasForeignKey("MemberPersNr")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("GitGruppen.Core.ParkingSpot", "ParkingSpot")
                         .WithOne("Vehicle")
