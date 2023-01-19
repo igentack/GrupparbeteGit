@@ -28,7 +28,7 @@ namespace Gitgruppen.Controllers
             var autoMapperViewModel = await mapper.ProjectTo<OverViewModel>(_context.Vehicle)
                 .OrderBy(m => m.LicensePlate)
                 .ToListAsync();
-           /* ViewData["ArrSort"] = "arrived";*/
+         
             return View(autoMapperViewModel);
         }
 
