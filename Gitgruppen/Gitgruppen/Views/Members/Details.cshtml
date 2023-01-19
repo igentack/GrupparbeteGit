@@ -93,9 +93,15 @@
                 </td>
                 <td>
                     <a class="btn btn-outline-dark" asp-controller="Vehicles" asp-action="Edit" asp-route-id="@item.LicensePlate">Edit</a> 
-                    <a class="btn btn-outline-dark" asp-controller="Vehicles" asp-action="Delete" asp-route-id="@item.LicensePlate">Delete</a> 
-                    <a class="btn btn-outline-dark" asp-controller="ParkingSpots" asp-action="Checkin" asp-route-id="@item.LicensePlate">Check in</a> 
+                    <a class="btn btn-outline-dark" asp-controller="Vehicles" asp-action="Delete" asp-route-id="@item.LicensePlate">Delete</a>
+                    @if (item.ParkingSpotId == null)
+                    {
+                        <a class="btn btn-outline-dark" asp-controller="ParkingSpots" asp-action="Checkin" asp-route-id="@item.LicensePlate">Check in</a>
+                    }
+                    @if(item.ParkingSpotId != null)
+                    {
                     <a class="btn btn-outline-dark" asp-controller="Receipts" asp-action="Checkout" asp-route-id="@item.LicensePlate">Check out</a>
+                    }
                 </td>
             </tr>
         }
