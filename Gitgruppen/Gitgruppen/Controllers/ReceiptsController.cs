@@ -60,7 +60,6 @@ namespace Gitgruppen.Controllers
             double startParkingPrice = 100;
             double pricePerHour = 50;
             double hoursParked = ParkedTime.TotalHours;
-            //TotalCost = 150 * ParkedTime.TotalMinutes;
             double totalCost = 0;
             totalCost = Math.Round(startParkingPrice + (hoursParked * pricePerHour),2);
             receipt.TotalCost = totalCost;

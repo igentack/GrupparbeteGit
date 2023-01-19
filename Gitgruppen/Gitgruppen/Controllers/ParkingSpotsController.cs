@@ -33,11 +33,14 @@ namespace Gitgruppen.Controllers
         {
             Vehicle vehicle = _context.Vehicle.Where(e => e.LicensePlate == id).First();
             Member member = _context.Member.Where(e => e.PersNr == vehicle.MemberPersNr).First();
-
+            vehicle.Arrived=DateTime.Now;
+            _context.Update(vehicle);
+            await _context.SaveChangesAsync();
 
             return View(new CheckinView
             {
                 MemberPersNr = member.PersNr,
+                
                 licenseplate = id,
                 FreeParkingSpots = _context.ParkingSpot.ToList(),
             });
