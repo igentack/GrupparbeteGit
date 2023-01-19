@@ -4,8 +4,9 @@ namespace Gitgruppen.Models
 {
     public class CheckoutView
     {
-    public    Vehicle Vehicle { get; set; }
-    public    Member Member { get; set; }
         public string persnr { get; internal set; }
+        public DateTime Arrived { get; set; }
+        public string LicensePlate { get; set; }
+        
     }
 }

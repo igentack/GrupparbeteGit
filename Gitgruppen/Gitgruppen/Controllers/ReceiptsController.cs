@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GitGruppen.Core;
 using Gitgruppen.Data;
 using Gitgruppen.Models;
+using System.Data;
 
 namespace Gitgruppen.Controllers
 {
@@ -21,22 +22,34 @@ namespace Gitgruppen.Controllers
         }
 
 
-        public IActionResult Checkout()
+        public async Task<IActionResult> Checkout(string id)
         {
-            return View();
+
+            Vehicle vehicle= _context.Vehicle.Where(e => e.LicensePlate == id).First();
+            Member member = vehicle.Member;
+            
+
+            CheckoutView cov = new CheckoutView();
+            cov.LicensePlate = vehicle.LicensePlate;
+            cov.persnr = member.PersNr;
+            cov.Arrived = vehicle.Arrived;    
+
+            return View(cov);
+
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Checkout(string id)
+        public async Task<IActionResult> Checkout(CheckoutView checkoutView)
         {
-
-            CheckoutView cov =  new CheckoutView();
-            cov.Vehicle = _context.Vehicle.Where(e => e.LicensePlate == id).FirstOrDefault();
-            cov.Member = _context.Member.Where(e => e.PersNr == cov.Vehicle.Member.PersNr).FirstOrDefault();
-
-            return View(cov);
+            Receipt receipt = new Receipt();
+            receipt.TotalCost = 0;
+            receipt.Vehicle = _context.Vehicle.Where(e => e.LicensePlate == checkoutView.LicensePlate).First();
+            receipt.TimeDeparture = DateTime.Now;
+            _context.Add(receipt);
+            await _context.SaveChangesAsync();
+            return RedirectToAction($"Receipt/Details/{receipt.Id}");
 
         }
 
