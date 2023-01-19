@@ -13,7 +13,16 @@
     <div class="col-md-4">
         <form asp-action="Checkin">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <label class="control-label">@Model.licenseplate</label>
+            <div class="form-group">
+                <label class="control-label" asp-for="licenseplate"></label>
+                <label class="control-label">@Model.licenseplate</label>
+                <input type="hidden" asp-for="licenseplate" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" asp-for="MemberPersNr"></label>
+                <label class="control-label">@Model.MemberPersNr</label>
+                <input type="hidden" asp-for="MemberPersNr" />
+            </div>
             <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
                 <select asp-for="Id" class="form-control">
