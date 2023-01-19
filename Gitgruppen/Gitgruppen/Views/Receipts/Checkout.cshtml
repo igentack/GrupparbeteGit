@@ -15,23 +15,26 @@
             <div class="form-group">
                 <label asp-for="LicensePlate" class="control-label"></label>
                 <label class="control-label">@Model.LicensePlate</label>
+                <input type="hidden" asp-for="LicensePlate"/>
                 <span asp-validation-for="LicensePlate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.MemberPersNr" class="control-label"></label>
                 <label  class="control-label">@Model.MemberPersNr</label>
+                <input type="hidden" asp-for="MemberPersNr" />
                 <span asp-validation-for="@Model.MemberPersNr" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Arrived" class="control-label"></label>
+                <label class="control-label">@Model.Arrived</label>
+                <input type="hidden" asp-for="Arrived" />
                 <span asp-validation-for="@Model.Arrived" class="text-danger"></span>
             </div>
             @*<div class="form-group">
                 <label asp-for="TotalCost" class="control-label"></label>
                 <input asp-for="TotalCost" class="form-control" />
                 <span asp-validation-for="TotalCost" class="text-danger"></span>
-            </div>
- *@
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Checkout" class="btn btn-primary" />
             </div>

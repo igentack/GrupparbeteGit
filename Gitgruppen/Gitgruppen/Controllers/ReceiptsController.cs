@@ -43,9 +43,12 @@ namespace Gitgruppen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Checkout(CheckoutView checkoutView)
         {
+            Vehicle vehicle = _context.Vehicle.Where(e => e.LicensePlate == checkoutView.LicensePlate).First();
+
             Receipt receipt = new Receipt();
             receipt.TotalCost = 0;
-            receipt.Vehicle = _context.Vehicle.Where(e => e.LicensePlate == checkoutView.LicensePlate).First();
+            receipt.VehicleLicensePlate = vehicle.LicensePlate;
+            receipt.MemberPersNr = vehicle.MemberPersNr;
             receipt.TimeDeparture = DateTime.Now;
             _context.Add(receipt);
             await _context.SaveChangesAsync();
