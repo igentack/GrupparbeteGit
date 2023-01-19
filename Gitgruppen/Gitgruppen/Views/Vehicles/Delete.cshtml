@@ -45,7 +45,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="LicensePlate" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> 
-        <a class="btn btn-outline-dark" asp-controller="GarageManager" asp-action="OverView">Back to List</a>
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a class="btn btn-outline-dark" asp-controller="Member" asp-action="Details" asp-route-id="@Model.MemberPersNr">Back to member</a>
     </form>
 </div>
