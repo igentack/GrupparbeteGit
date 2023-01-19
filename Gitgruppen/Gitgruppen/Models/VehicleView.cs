@@ -21,7 +21,7 @@ namespace Gitgruppen.Models
         public string VehicleTypeName { get; set; }
         public VehicleType VehicleType { get; set; }
         public string MemberId { get; set; }
-        public Member Member { get; set; }
+        public string FullName { get; set; }
         public int? ParkingSpotId { get; set; }
         public List<VehicleType> VehicleTypes { get; internal set; }
     }

@@ -69,7 +69,7 @@ namespace Gitgruppen.Controllers
                       TypeId = e.VehicleTypeId,
                       VehicleTypeName = e.VehicleType.Type,
                       VehicleType = e.VehicleType,
-                      Member = e.Member,
+                      MemberId = e.Member.PersNr,
                       ParkingSpotId = e.ParkingSpotId
             }).ToList()
             };
