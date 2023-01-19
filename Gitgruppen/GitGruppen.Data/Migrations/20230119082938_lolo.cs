@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GitGruppen.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class yoda2 : Migration
+    public partial class lolo : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

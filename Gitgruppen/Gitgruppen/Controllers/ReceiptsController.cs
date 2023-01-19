@@ -25,13 +25,13 @@ namespace Gitgruppen.Controllers
         public async Task<IActionResult> Checkout(string id)
         {
 
-            Vehicle vehicle= _context.Vehicle.Where(e => e.LicensePlate == id).First();
+            Vehicle vehicle = _context.Vehicle.Where(e => e.LicensePlate == id).First();
             Member member = vehicle.Member;
             
 
             CheckoutView cov = new CheckoutView();
             cov.LicensePlate = vehicle.LicensePlate;
-            cov.persnr = member.PersNr;
+            cov.MemberPersNr = member.PersNr;
             cov.Arrived = vehicle.Arrived;    
 
             return View(cov);
