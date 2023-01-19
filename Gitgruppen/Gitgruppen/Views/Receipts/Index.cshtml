@@ -12,6 +12,13 @@
 <table class="table">
     <thead>
         <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.VehicleLicensePlate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberPersNr)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.TimeDeparture)
             </th>
@@ -27,6 +34,16 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleLicensePlate)
+                </td>
+
+                <td>
+                   <a asp-controller="Members" asp-action="Details" asp-route-id="@item.MemberPersNr">
+                    @Html.DisplayFor(modelItem => item.MemberPersNr)
+                    </a>
+                </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.TimeDeparture)
             </td>
