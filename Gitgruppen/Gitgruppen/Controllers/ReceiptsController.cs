@@ -48,7 +48,7 @@ namespace Gitgruppen.Controllers
             Receipt receipt = new Receipt();
             receipt.TotalCost = 0;
             receipt.VehicleLicensePlate = vehicle.LicensePlate;
-            receipt.MemberPersNr = vehicle.MemberPersNr;
+            receipt.MemberPersNr = vehicle.MemberPersNr;           
             receipt.TimeDeparture = DateTime.Now;
             receipt.TimeArrival = vehicle.Arrived;
 
