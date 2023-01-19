@@ -92,7 +92,13 @@ namespace Gitgruppen.Controllers
             _context.Add(vehicle);
 
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+
+            var routeValues = new RouteValueDictionary {
+                  { "id", vehicle.MemberPersNr }
+            };
+
+            return RedirectToAction("Details", "Members", routeValues);
            // }
             //  return View(vehicle);
         }
