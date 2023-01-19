@@ -50,7 +50,6 @@ namespace Gitgruppen.Controllers
             _context.Add(receipt);
             await _context.SaveChangesAsync();
             return RedirectToAction($"Receipt/Details/{receipt.Id}");
-
         }
 
         // GET: Receipts
