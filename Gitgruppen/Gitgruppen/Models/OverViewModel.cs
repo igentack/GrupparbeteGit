@@ -18,6 +18,8 @@ namespace Gitgruppen.Models
 
         public DateTime Arrived { get; set; }
 
+        public string VehicleTypeType { get; set; }
+
         //[DisplayFormat(DataFormatString = "{0:hh\\:mm\\:ss}")]
         [DisplayFormat(DataFormatString = "{0:dd}")]
         public TimeSpan ParkedTime { 

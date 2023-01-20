@@ -12,7 +12,7 @@ namespace GitGruppen.Core
         public string LicensePlate { get; set; }
 
         [Display(Name = "Arrived Date")]
-        public DateTime Arrived { get; set; }
+        public DateTime Arrived { get; set; } = DateTime.Now;
 
         public string Color { get; set; }
         public string Brand { get; set; }
