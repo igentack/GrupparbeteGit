@@ -34,7 +34,6 @@ namespace Gitgruppen.Controllers
                 .OrderBy(m => m.FirstName)
                 .ToListAsync(); 
                     
-
             return View(autoMapperViewModel);
         }
 

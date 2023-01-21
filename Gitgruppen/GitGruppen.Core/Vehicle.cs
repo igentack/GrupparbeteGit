@@ -23,6 +23,8 @@ namespace GitGruppen.Core
     
         public VehicleType VehicleType { get; set; }
 
+      
+
         public string MemberPersNr { get; set; }
         public Member Member { get; set; }
 

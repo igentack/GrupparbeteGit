@@ -39,7 +39,7 @@ namespace Gitgruppen.Controllers
         public async Task<IActionResult> Search(string sort, string licensePlate)
         {
             ViewData["TypeSort"] = String.IsNullOrEmpty(sort) ? "typeDesc" : "";
-            ViewData["LicenseSort"] = sort == "arrived" ? "arrDesc" : "arrived";
+            ViewData["LicenseSort"] = sort == "licenseAce" ? "licenseDesc" : "licenseAce";
             ViewData["LicensePlate"] = licensePlate;
 
          
@@ -53,24 +53,23 @@ namespace Gitgruppen.Controllers
             switch (sort)
             {
                 case "typeDesc":
-                    vehicles = vehicles.OrderByDescending(v => v.MemberPersNr);
+                    vehicles = vehicles.OrderByDescending(v => v.VehicleType);
                     break;
 
-                case "arrived":
+                case "licenseAce":
                     vehicles = vehicles.OrderBy(v => v.LicensePlate);
                     break;
 
-                case "arrDesc":
+                case "licenseDesc":
                     vehicles = vehicles.OrderByDescending(v => v.LicensePlate);
                     break;
 
                 default:
-                    vehicles = vehicles.OrderBy(v => v.MemberPersNr);
+                    vehicles = vehicles.OrderBy(v => v.VehicleType);
                     break;
             }
 
-            var autoMapperViewModel = await mapper.ProjectTo<OverViewModel>(vehicles.AsNoTracking())
-                
+            var autoMapperViewModel = await mapper.ProjectTo<OverViewModel>(vehicles.AsNoTracking())               
                  .ToListAsync();
 
             return View("Search", autoMapperViewModel);
