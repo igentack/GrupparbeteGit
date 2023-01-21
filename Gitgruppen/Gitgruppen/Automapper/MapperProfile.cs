@@ -8,7 +8,9 @@ namespace Gitgruppen.Automapper
     {
         public MapperProfile() 
         {
+            CreateMap<Vehicle, VehicleView>();
             CreateMap<Vehicle, OverViewModel>();
+            CreateMap<Member, MemberDetailsView>();
             CreateMap<Member, MemberView>()
                 .ForMember(
                 dest => dest.MemberHasNrVehicles,

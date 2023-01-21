@@ -40,40 +40,56 @@ namespace Gitgruppen.Controllers
         // GET: Members/Details/5
         public async Task<IActionResult> Details(string id)
         {
+
             if (id == null || _context.Member == null)
             {
                 return NotFound();
             }
 
             var member = await _context.Member
+                .Include(m => m.Vehicles)
                 .FirstOrDefaultAsync(m => m.PersNr == id);
             if (member == null)
             {
                 return NotFound();
             }
+            /*     if (id == null || _context.Member == null)
+                 {
+                     return NotFound();
+                 }
 
-            MemberDetailsView mdv = new MemberDetailsView
-            {
-                PersNr = member.PersNr,
-                FirstName = member.FirstName,
-                LastName = member.LastName,
-                Vehicles = _context.Vehicle.Where(e => e.Member.PersNr == member.PersNr).Select(e => new VehicleView
-                {
-                      LicensePlate = e.LicensePlate,
-                      Arrived = e.Arrived,
-                      Color = e.Color,
-                      Brand = e.Brand,
-                      Model = e.Model,
-                      NumberOfWheels = e.NumberOfWheels,
-                      TypeId = e.VehicleTypeId,
-                      VehicleTypeName = e.VehicleType.Type,
-                      VehicleType = e.VehicleType,
-                      MemberId = e.Member.PersNr,
-                      ParkingSpotId = e.ParkingSpotId
-            }).ToList()
-            };
+                 var member = await _context.Member
+                     .FirstOrDefaultAsync(m => m.PersNr == id);
+                 if (member == null)
+                 {
+                     return NotFound();
+                 }*/
 
-            return View(mdv);
+            /*      MemberDetailsView mdv = new MemberDetailsView
+                  {
+                      PersNr = member.PersNr,
+                      FirstName = member.FirstName,
+                      LastName = member.LastName,
+                      Vehicles = _context.Vehicle.Where(e => e.Member.PersNr == member.PersNr).Select(e => new VehicleView
+                      {
+                            LicensePlate = e.LicensePlate,
+                            Arrived = e.Arrived,
+                            Color = e.Color,
+                            Brand = e.Brand,
+                            Model = e.Model,
+                            NumberOfWheels = e.NumberOfWheels,
+                            TypeId = e.VehicleTypeId,
+                            VehicleTypeName = e.VehicleType.Type,
+                            VehicleType = e.VehicleType,
+                            MemberId = e.Member.PersNr,
+                            ParkingSpotId = e.ParkingSpotId
+                  }).ToList()
+                  };
+
+                  return View(mdv);*/
+
+            var memberDetailsView = mapper.Map<MemberDetailsView>(member);
+            return View(memberDetailsView);
         }
 
         // GET: Members/Create
